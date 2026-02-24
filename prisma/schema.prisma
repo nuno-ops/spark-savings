@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── USERS ───────────────────────────────────────────────
+model User {
+  id             String   @id @default(uuid())
+  email          String   @unique
+  name           String
+  passwordHash   String
+  role           String   @default("contributor") // "contributor" | "company" | "admin"
+  suspended      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  // Relations
+  opportunities  Opportunity[]
+  purchases      Purchase[]
+  apiKeys        ApiKey[]
+  sentMessages   Message[]       @relation("SentMessages")
+  meetingsAsCompany  Meeting[]   @relation("CompanyMeetings")
+  meetingsAsContributor Meeting[] @relation("ContributorMeetings")
+}
+
+// ─── OPPORTUNITIES ───────────────────────────────────────
+model Opportunity {
+  id                  String   @id @default(uuid())
+  contributorId       String
+  contributor         User     @relation(fields: [contributorId], references: [id])
+
+  // Public teaser (always visible)
+  title               String
+  brief               String   // short description shown publicly
+  category            String   @default("general")
+
+  // Stage 1 content (shown after Stage 1 purchase)
+  validationChecklist String   @default("") // markdown
+  requirements        String   @default("") // markdown
+  highLevelApproach   String   @default("") // markdown
+  stage1Price         Int      @default(250) // 250 or 500 euros (stored in cents? No, keep simple: euros)
+
+  // Stage 2 content (shown after Stage 2 purchase)
+  fullPlaybook        String   @default("") // markdown
+  templates           String   @default("") // markdown / links
+  stage2Price         Int      @default(0)  // contributor sets this
+  savingsEstimateLow  Int      @default(0)  // estimated savings range low
+  savingsEstimateHigh Int      @default(0)  // estimated savings range high
+
+  // Status & moderation
+  status              String   @default("draft") // "draft" | "published" | "suspended" | "flagged"
+  confidenceScore     Float    @default(0)
+  duplicateOfId       String?
+  piiDetected         Boolean  @default(false)
+  flagReason          String?
+  submittedViaApi     Boolean  @default(false)
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  purchases           Purchase[]
+  messages            Message[]
+  meetings            Meeting[]
+}
+
+// ─── PURCHASES ───────────────────────────────────────────
+model Purchase {
+  id              String   @id @default(uuid())
+  companyId       String
+  company         User     @relation(fields: [companyId], references: [id])
+  opportunityId   String
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
+
+  stage           Int      // 1 or 2
+  amountEuros     Int
+  platformFeeEuros Int
+  contributorPayoutEuros Int
+  stripePaymentId String   @default("")
+
+  status          String   @default("completed") // "completed" | "refund_requested" | "refunded"
+  refundRequestedAt DateTime?
+  refundedAt      DateTime?
+
+  createdAt       DateTime @default(now())
+}
+
+// ─── MESSAGES ────────────────────────────────────────────
+model Message {
+  id              String   @id @default(uuid())
+  opportunityId   String
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
+  senderId        String
+  sender          User     @relation("SentMessages", fields: [senderId], references: [id])
+  content         String
+  createdAt       DateTime @default(now())
+}
+
+// ─── MEETINGS ────────────────────────────────────────────
+model Meeting {
+  id              String   @id @default(uuid())
+  opportunityId   String
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
+  companyId       String
+  company         User     @relation("CompanyMeetings", fields: [companyId], references: [id])
+  contributorId   String
+  contributor     User     @relation("ContributorMeetings", fields: [contributorId], references: [id])
+
+  proposedTimes   String   // JSON array of proposed times
+  confirmedTime   String?
+  status          String   @default("proposed") // "proposed" | "confirmed" | "completed" | "cancelled"
+  createdAt       DateTime @default(now())
+}
+
+// ─── API KEYS (for AI agents) ────────────────────────────
+model ApiKey {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  keyHash     String   @unique  // store hashed, show prefix only
+  keyPrefix   String             // first 8 chars for display
+  name        String   @default("Default")
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
