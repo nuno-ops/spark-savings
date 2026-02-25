@@ -14,6 +14,12 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-4">
+          <Link
+            href="/how-it-works"
+            className="text-gray-600 hover:text-gray-900"
+          >
+            How It Works
+          </Link>
           {!session ? (
             <>
               <Link

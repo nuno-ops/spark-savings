@@ -10,10 +10,22 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
   const priceTier = searchParams.get("priceTier"); // "250" or "500"
+  const search = searchParams.get("search");
 
-  const where: Record<string, unknown> = { status: "published" };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const where: any = { status: "published" };
   if (category && category !== "all") where.category = category;
   if (priceTier) where.stage1Price = parseInt(priceTier);
+
+  // Text search across title, brief, and company
+  if (search && search.trim()) {
+    const term = search.trim();
+    where.OR = [
+      { title: { contains: term } },
+      { brief: { contains: term } },
+      { company: { contains: term } },
+    ];
+  }
 
   const opportunities = await prisma.opportunity.findMany({
     where,
@@ -21,17 +33,33 @@ export async function GET(req: NextRequest) {
       id: true,
       title: true,
       brief: true,
+      company: true,
       category: true,
       stage1Price: true,
       stage2Price: true,
       confidenceScore: true,
       createdAt: true,
       contributor: { select: { name: true } },
+      reviews: { select: { rating: true } },
     },
     orderBy: { createdAt: "desc" },
   });
 
-  return NextResponse.json(opportunities);
+  // Compute avgRating and reviewCount for each opportunity
+  const result = opportunities.map((opp) => {
+    const ratings = opp.reviews.map((r) => r.rating);
+    const reviewCount = ratings.length;
+    const avgRating =
+      reviewCount > 0
+        ? Math.round((ratings.reduce((a, b) => a + b, 0) / reviewCount) * 10) /
+          10
+        : 0;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { reviews, ...rest } = opp;
+    return { ...rest, avgRating, reviewCount };
+  });
+
+  return NextResponse.json(result);
 }
 
 // POST /api/opportunities — create a new opportunity (contributor only)
@@ -55,6 +83,7 @@ export async function POST(req: NextRequest) {
   const {
     title,
     brief,
+    company,
     category,
     stage1Price,
     validationChecklist,
@@ -67,9 +96,21 @@ export async function POST(req: NextRequest) {
     savingsEstimateHigh,
   } = body;
 
-  if (!title || !brief) {
+  if (
+    !title ||
+    !brief ||
+    !company ||
+    !validationChecklist ||
+    !requirements ||
+    !highLevelApproach ||
+    !fullPlaybook ||
+    !templates ||
+    !savingsEstimateLow ||
+    !savingsEstimateHigh ||
+    !stage2Price
+  ) {
     return NextResponse.json(
-      { error: "Title and brief are required" },
+      { error: "All fields are required" },
       { status: 400 }
     );
   }
@@ -103,16 +144,17 @@ export async function POST(req: NextRequest) {
       contributorId: session.user.id,
       title,
       brief,
+      company,
       category: category || "general",
       stage1Price: stage1Price || 250,
-      validationChecklist: validationChecklist || "",
-      requirements: requirements || "",
-      highLevelApproach: highLevelApproach || "",
-      fullPlaybook: fullPlaybook || "",
-      templates: templates || "",
-      stage2Price: stage2Price || 0,
-      savingsEstimateLow: savingsEstimateLow || 0,
-      savingsEstimateHigh: savingsEstimateHigh || 0,
+      validationChecklist,
+      requirements,
+      highLevelApproach,
+      fullPlaybook,
+      templates,
+      stage2Price,
+      savingsEstimateLow,
+      savingsEstimateHigh,
       status,
       confidenceScore: triage.confidenceScore,
       duplicateOfId: triage.duplicateOfId,

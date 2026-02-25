@@ -5,6 +5,14 @@ import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
+interface ReviewItem {
+  id: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  company: { name: string };
+}
+
 interface OpportunityDetail {
   id: string;
   title: string;
@@ -20,6 +28,9 @@ interface OpportunityDetail {
   contributor: { id: string; name: string };
   hasStage1: boolean;
   hasStage2: boolean;
+  avgRating: number;
+  reviewCount: number;
+  reviews: ReviewItem[];
   // Stage 1 content (only if unlocked)
   validationChecklist?: string;
   requirements?: string;
@@ -29,6 +40,21 @@ interface OpportunityDetail {
   fullPlaybook?: string;
   templates?: string;
   watermark2?: string;
+}
+
+function StarDisplay({ rating }: { rating: number }) {
+  const stars = [];
+  for (let i = 1; i <= 5; i++) {
+    stars.push(
+      <span
+        key={i}
+        className={i <= Math.round(rating) ? "text-yellow-400" : "text-gray-300"}
+      >
+        &#9733;
+      </span>
+    );
+  }
+  return <span className="inline-flex">{stars}</span>;
 }
 
 export default function OpportunityDetailPage() {
@@ -93,7 +119,19 @@ export default function OpportunityDetailPage() {
           </span>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-3">{opp.title}</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">{opp.title}</h1>
+
+        {/* Rating summary */}
+        {opp.reviewCount > 0 && (
+          <div className="flex items-center gap-2 mb-3">
+            <StarDisplay rating={opp.avgRating} />
+            <span className="text-sm text-gray-600">
+              {opp.avgRating.toFixed(1)} ({opp.reviewCount}{" "}
+              {opp.reviewCount === 1 ? "review" : "reviews"})
+            </span>
+          </div>
+        )}
+
         <p className="text-gray-600 mb-6">{opp.brief}</p>
 
         <div className="text-sm text-gray-500 mb-6">
@@ -103,8 +141,8 @@ export default function OpportunityDetailPage() {
 
         {opp.savingsEstimateLow > 0 && (
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 text-sm text-green-800">
-            Estimated savings: €{opp.savingsEstimateLow.toLocaleString()} — €
-            {opp.savingsEstimateHigh.toLocaleString()}
+            Estimated savings: &euro;{opp.savingsEstimateLow.toLocaleString()} —
+            &euro;{opp.savingsEstimateHigh.toLocaleString()}
           </div>
         )}
 
@@ -166,7 +204,7 @@ export default function OpportunityDetailPage() {
                 >
                   {purchasing
                     ? "Processing..."
-                    : `Unlock Stage 1 — €${opp.stage1Price}`}
+                    : `Unlock Stage 1 — \u20AC${opp.stage1Price}`}
                 </button>
               )}
               {!session && (
@@ -241,7 +279,7 @@ export default function OpportunityDetailPage() {
                   >
                     {purchasing
                       ? "Processing..."
-                      : `Unlock Stage 2 — €${opp.stage2Price}`}
+                      : `Unlock Stage 2 — \u20AC${opp.stage2Price}`}
                   </button>
                 )}
                 {isCompany && !opp.hasStage1 && (
@@ -253,6 +291,49 @@ export default function OpportunityDetailPage() {
             )}
           </div>
         )}
+
+        {/* ── REVIEWS ──────────────────────────────────────── */}
+        <div className="border-t border-gray-200 pt-6 mt-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Reviews
+            {opp.reviewCount > 0 && (
+              <span className="text-sm font-normal text-gray-500 ml-2">
+                ({opp.reviewCount})
+              </span>
+            )}
+          </h2>
+
+          {opp.reviews && opp.reviews.length > 0 ? (
+            <div className="space-y-4">
+              {opp.reviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="bg-gray-50 rounded-lg p-4"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <StarDisplay rating={review.rating} />
+                      <span className="text-sm font-medium text-gray-700">
+                        {review.company.name}
+                      </span>
+                    </div>
+                    <span className="text-xs text-gray-400">
+                      {new Date(review.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  {review.comment && (
+                    <p className="text-sm text-gray-600">{review.comment}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400">
+              No reviews yet. Companies who purchase this opportunity can leave a
+              review.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

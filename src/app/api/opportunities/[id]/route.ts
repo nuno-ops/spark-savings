@@ -22,6 +22,10 @@ export async function GET(
             select: { id: true, stage: true, createdAt: true },
           }
         : false,
+      reviews: {
+        include: { company: { select: { name: true } } },
+        orderBy: { createdAt: "desc" as const },
+      },
     },
   });
 
@@ -42,11 +46,20 @@ export async function GET(
     (p: { stage: number }) => p.stage === 2
   );
 
+  // Compute rating aggregates
+  const ratings = opportunity.reviews.map((r) => r.rating);
+  const reviewCount = ratings.length;
+  const avgRating =
+    reviewCount > 0
+      ? Math.round((ratings.reduce((a, b) => a + b, 0) / reviewCount) * 10) / 10
+      : 0;
+
   // Build response — hide sealed content unless authorized
   const result: Record<string, unknown> = {
     id: opportunity.id,
     title: opportunity.title,
     brief: opportunity.brief,
+    company: opportunity.company,
     category: opportunity.category,
     stage1Price: opportunity.stage1Price,
     stage2Price: opportunity.stage2Price,
@@ -58,6 +71,15 @@ export async function GET(
     contributor: opportunity.contributor,
     hasStage1,
     hasStage2,
+    avgRating,
+    reviewCount,
+    reviews: opportunity.reviews.map((r) => ({
+      id: r.id,
+      rating: r.rating,
+      comment: r.comment,
+      createdAt: r.createdAt,
+      company: r.company,
+    })),
   };
 
   if (hasStage1 || isOwner || isAdmin) {
@@ -157,6 +179,7 @@ export async function PUT(
     data: {
       ...(body.title !== undefined && { title: body.title }),
       ...(body.brief !== undefined && { brief: body.brief }),
+      ...(body.company !== undefined && { company: body.company }),
       ...(body.category !== undefined && { category: body.category }),
       ...(body.stage1Price !== undefined && { stage1Price: body.stage1Price }),
       ...(body.validationChecklist !== undefined && {

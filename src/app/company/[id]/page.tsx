@@ -14,6 +14,7 @@ interface OppDetail {
   templates?: string;
   watermark?: string;
   watermark2?: string;
+  hasStage1: boolean;
   hasStage2: boolean;
   stage2Price: number;
 }
@@ -33,6 +34,40 @@ interface MeetingItem {
   contributor: { name: string };
 }
 
+interface ExistingReview {
+  id: string;
+  rating: number;
+  comment: string;
+}
+
+function StarPicker({
+  rating,
+  onSelect,
+}: {
+  rating: number;
+  onSelect: (r: number) => void;
+}) {
+  const [hover, setHover] = useState(0);
+  return (
+    <span className="inline-flex gap-1">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <button
+          key={i}
+          type="button"
+          className={`text-2xl transition-colors ${
+            i <= (hover || rating) ? "text-yellow-400" : "text-gray-300"
+          } hover:text-yellow-400`}
+          onMouseEnter={() => setHover(i)}
+          onMouseLeave={() => setHover(0)}
+          onClick={() => onSelect(i)}
+        >
+          &#9733;
+        </button>
+      ))}
+    </span>
+  );
+}
+
 export default function CompanyOpportunityPage() {
   const { id } = useParams();
   const { data: session } = useSession();
@@ -43,6 +78,16 @@ export default function CompanyOpportunityPage() {
   const [proposedTimes, setProposedTimes] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Review form state
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
+  const [existingReview, setExistingReview] = useState<ExistingReview | null>(
+    null
+  );
+  const [reviewSaving, setReviewSaving] = useState(false);
+  const [reviewSuccess, setReviewSuccess] = useState("");
+  const [reviewError, setReviewError] = useState("");
+
   useEffect(() => {
     Promise.all([
       fetch(`/api/opportunities/${id}`).then((r) => r.json()),
@@ -50,7 +95,8 @@ export default function CompanyOpportunityPage() {
         r.json().catch(() => [])
       ),
       fetch(`/api/meetings`).then((r) => r.json()),
-    ]).then(([oppData, msgData, meetingData]) => {
+      fetch(`/api/reviews?opportunityId=${id}`).then((r) => r.json()),
+    ]).then(([oppData, msgData, meetingData, reviewsData]) => {
       setOpp(oppData);
       setMessages(Array.isArray(msgData) ? msgData : []);
       setMeetings(
@@ -61,9 +107,47 @@ export default function CompanyOpportunityPage() {
             )
           : []
       );
+
+      // Check if current user already has a review
+      if (session?.user?.id && Array.isArray(reviewsData)) {
+        const myReview = reviewsData.find(
+          (r: { companyId?: string; company?: { name: string } }) => {
+            // The review API returns company.name, so we match by name
+            // But better to check from the opportunity detail response
+            return false; // Will load from separate endpoint
+          }
+        );
+        if (myReview) {
+          setExistingReview(myReview);
+          setReviewRating(myReview.rating);
+          setReviewComment(myReview.comment || "");
+        }
+      }
+
       setLoading(false);
     });
-  }, [id]);
+  }, [id, session]);
+
+  // Load existing review for this user
+  useEffect(() => {
+    if (!session?.user?.id || !id) return;
+    fetch(`/api/reviews?opportunityId=${id}`)
+      .then((r) => r.json())
+      .then((reviews) => {
+        if (Array.isArray(reviews)) {
+          // Match by company name since we don't get companyId in the response
+          const userName = session.user?.name;
+          const myReview = reviews.find(
+            (r: { company: { name: string } }) => r.company.name === userName
+          );
+          if (myReview) {
+            setExistingReview(myReview);
+            setReviewRating(myReview.rating);
+            setReviewComment(myReview.comment || "");
+          }
+        }
+      });
+  }, [id, session]);
 
   async function sendMessage() {
     if (!newMessage.trim()) return;
@@ -94,10 +178,44 @@ export default function CompanyOpportunityPage() {
     }
   }
 
+  async function submitReview() {
+    if (reviewRating === 0) {
+      setReviewError("Please select a rating");
+      return;
+    }
+    setReviewSaving(true);
+    setReviewError("");
+    setReviewSuccess("");
+
+    const res = await fetch("/api/reviews", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        opportunityId: id,
+        rating: reviewRating,
+        comment: reviewComment,
+      }),
+    });
+
+    if (res.ok) {
+      const review = await res.json();
+      setExistingReview(review);
+      setReviewSuccess(
+        existingReview ? "Review updated!" : "Review submitted!"
+      );
+    } else {
+      const data = await res.json();
+      setReviewError(data.error || "Failed to submit review");
+    }
+    setReviewSaving(false);
+  }
+
   if (loading) return <p className="text-gray-500">Loading...</p>;
   if (!opp) return <p className="text-red-600">Not found.</p>;
 
+  const hasStage1 = opp.hasStage1;
   const hasStage2 = opp.hasStage2;
+  const hasPurchase = hasStage1 || hasStage2;
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -165,6 +283,58 @@ export default function CompanyOpportunityPage() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Review Form (visible if company has any purchase) */}
+      {hasPurchase && (
+        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+          <h2 className="font-semibold text-gray-800 mb-3">
+            {existingReview ? "Your Review" : "Leave a Review"}
+          </h2>
+
+          {reviewSuccess && (
+            <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg mb-3 text-sm">
+              {reviewSuccess}
+            </div>
+          )}
+          {reviewError && (
+            <div className="bg-red-50 text-red-700 px-4 py-2 rounded-lg mb-3 text-sm">
+              {reviewError}
+            </div>
+          )}
+
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Rating
+            </label>
+            <StarPicker rating={reviewRating} onSelect={setReviewRating} />
+          </div>
+
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Comment (optional)
+            </label>
+            <textarea
+              value={reviewComment}
+              onChange={(e) => setReviewComment(e.target.value)}
+              rows={3}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              placeholder="Share your experience with this opportunity..."
+            />
+          </div>
+
+          <button
+            onClick={submitReview}
+            disabled={reviewSaving || reviewRating === 0}
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 disabled:opacity-50"
+          >
+            {reviewSaving
+              ? "Submitting..."
+              : existingReview
+                ? "Update Review"
+                : "Submit Review"}
+          </button>
         </div>
       )}
 
