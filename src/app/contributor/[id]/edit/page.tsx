@@ -13,6 +13,7 @@ export default function EditOpportunityPage() {
   const [form, setForm] = useState({
     title: "",
     brief: "",
+    company: "",
     category: "general",
     stage1Price: 250,
     validationChecklist: "",
@@ -37,6 +38,7 @@ export default function EditOpportunityPage() {
         setForm({
           title: data.title || "",
           brief: data.brief || "",
+          company: data.company || "",
           category: data.category || "general",
           stage1Price: data.stage1Price || 250,
           validationChecklist: data.validationChecklist || "",
@@ -99,10 +101,11 @@ export default function EditOpportunityPage() {
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title
+              Title <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
+              required
               value={form.title}
               onChange={(e) => updateField("title", e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-3 py-2"
@@ -110,21 +113,36 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Brief
+              Brief <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.brief}
               onChange={(e) => updateField("brief", e.target.value)}
               rows={3}
               className="w-full border border-gray-300 rounded-lg px-3 py-2"
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Company <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              value={form.company}
+              onChange={(e) => updateField("company", e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2"
+              placeholder="e.g. Acme Corp, or type of company this applies to"
+            />
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Category
+                Category <span className="text-red-500">*</span>
               </label>
               <select
+                required
                 value={form.category}
                 onChange={(e) => updateField("category", e.target.value)}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
@@ -138,9 +156,10 @@ export default function EditOpportunityPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Stage 1 Price
+                Stage 1 Price <span className="text-red-500">*</span>
               </label>
               <select
+                required
                 value={form.stage1Price}
                 onChange={(e) =>
                   updateField("stage1Price", parseInt(e.target.value))
@@ -157,9 +176,10 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Validation Checklist
+              Validation Checklist <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.validationChecklist}
               onChange={(e) =>
                 updateField("validationChecklist", e.target.value)
@@ -170,9 +190,10 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Requirements
+              Requirements <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.requirements}
               onChange={(e) => updateField("requirements", e.target.value)}
               rows={3}
@@ -181,9 +202,10 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              High-Level Approach
+              High-Level Approach <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.highLevelApproach}
               onChange={(e) =>
                 updateField("highLevelApproach", e.target.value)
@@ -194,9 +216,10 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Playbook
+              Full Playbook <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.fullPlaybook}
               onChange={(e) => updateField("fullPlaybook", e.target.value)}
               rows={6}
@@ -205,9 +228,10 @@ export default function EditOpportunityPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Templates
+              Templates <span className="text-red-500">*</span>
             </label>
             <textarea
+              required
               value={form.templates}
               onChange={(e) => updateField("templates", e.target.value)}
               rows={3}
@@ -217,10 +241,12 @@ export default function EditOpportunityPage() {
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Savings Low (€)
+                Savings Low (€) <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
+                required
+                min={1}
                 value={form.savingsEstimateLow || ""}
                 onChange={(e) =>
                   updateField(
@@ -233,10 +259,12 @@ export default function EditOpportunityPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Savings High (€)
+                Savings High (€) <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
+                required
+                min={1}
                 value={form.savingsEstimateHigh || ""}
                 onChange={(e) =>
                   updateField(
@@ -249,10 +277,12 @@ export default function EditOpportunityPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Stage 2 Price (€)
+                Stage 2 Price (€) <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
+                required
+                min={1}
                 value={form.stage2Price || ""}
                 onChange={(e) =>
                   updateField("stage2Price", parseInt(e.target.value) || 0)

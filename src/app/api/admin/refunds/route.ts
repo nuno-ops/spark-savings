@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import Stripe from "stripe";
+
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2025-04-30.basil" as Stripe.LatestApiVersion,
+    })
+  : null;
 
 // GET /api/admin/refunds — list refund requests
 export async function GET() {
@@ -49,6 +56,22 @@ export async function POST(req: NextRequest) {
   }
 
   if (action === "approve") {
+    // If purchase was made via Stripe, issue a refund through Stripe
+    if (stripe && purchase.stripePaymentId) {
+      try {
+        await stripe.refunds.create({
+          payment_intent: purchase.stripePaymentId,
+        });
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Stripe refund failed";
+        return NextResponse.json(
+          { error: `Stripe refund failed: ${message}` },
+          { status: 500 }
+        );
+      }
+    }
+
     await prisma.purchase.update({
       where: { id: purchaseId },
       data: { status: "refunded", refundedAt: new Date() },

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   if (!type || !id || typeof suspend !== "boolean") {
     return NextResponse.json(
-      { error: "type (user|opportunity), id, and suspend (boolean) required" },
+      { error: "type (user|opportunity|request), id, and suspend (boolean) required" },
       { status: 400 }
     );
   }
@@ -31,6 +31,14 @@ export async function POST(req: NextRequest) {
     await prisma.opportunity.update({
       where: { id },
       data: { status: suspend ? "suspended" : "draft" },
+    });
+    return NextResponse.json({ success: true });
+  }
+
+  if (type === "request") {
+    await prisma.companyRequest.update({
+      where: { id },
+      data: { status: suspend ? "suspended" : "open" },
     });
     return NextResponse.json({ success: true });
   }
