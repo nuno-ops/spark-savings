@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -25,6 +25,20 @@ model User {
   meetingsAsCompany  Meeting[]   @relation("CompanyMeetings")
   meetingsAsContributor Meeting[] @relation("ContributorMeetings")
   reviews        Review[]
+  passwordResets PasswordReset[]
+  companyRequests   CompanyRequest[]    @relation("CompanyRequests")
+  proposals         RequestProposal[]   @relation("ContributorProposals")
+}
+
+// ─── PASSWORD RESETS ─────────────────────────────────────
+model PasswordReset {
+  id        String    @id @default(uuid())
+  token     String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
 }
 
 // ─── OPPORTUNITIES ───────────────────────────────────────
@@ -68,6 +82,7 @@ model Opportunity {
   messages            Message[]
   meetings            Meeting[]
   reviews             Review[]
+  views               OpportunityView[]
 }
 
 // ─── PURCHASES ───────────────────────────────────────────
@@ -145,4 +160,55 @@ model Review {
   updatedAt       DateTime @updatedAt
 
   @@unique([companyId, opportunityId])
+}
+
+// ─── COMPANY REQUESTS (BOUNTIES) ─────────────────────────
+model CompanyRequest {
+  id          String   @id @default(uuid())
+  companyId   String
+  company     User     @relation("CompanyRequests", fields: [companyId], references: [id])
+
+  title       String
+  description String
+  category    String   @default("general")
+  budgetLow   Int?
+  budgetHigh  Int?
+
+  status      String   @default("open") // "open" | "closed" | "suspended"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  proposals   RequestProposal[]
+}
+
+// ─── REQUEST PROPOSALS ──────────────────────────────────
+model RequestProposal {
+  id              String   @id @default(uuid())
+  requestId       String
+  request         CompanyRequest @relation(fields: [requestId], references: [id])
+  contributorId   String
+  contributor     User     @relation("ContributorProposals", fields: [contributorId], references: [id])
+
+  summary         String
+  approach        String
+  estimatedSavings Int     @default(0)
+  proposedPrice   Int      @default(0)
+
+  status          String   @default("pending") // "pending" | "accepted" | "rejected"
+  opportunityId   String?  // linked if converted to full opportunity
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([requestId, contributorId])
+}
+
+// ─── OPPORTUNITY VIEWS (analytics) ─────────────────────
+model OpportunityView {
+  id              String   @id @default(uuid())
+  opportunityId   String
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
+  viewerRole      String   @default("anonymous") // "anonymous" | "company" | "contributor" | "admin"
+  createdAt       DateTime @default(now())
 }

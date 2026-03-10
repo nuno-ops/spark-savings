@@ -20,6 +20,9 @@ export const CATEGORIES = [
 
 export const REFUND_WINDOW_HOURS = 48;
 
+export const REQUEST_STATUSES = ["open", "closed", "suspended"] as const;
+export const PROPOSAL_STATUSES = ["pending", "accepted", "rejected"] as const;
+
 // Confidential-leak keywords to flag
 export const CONFIDENTIAL_KEYWORDS = [
   "nda",

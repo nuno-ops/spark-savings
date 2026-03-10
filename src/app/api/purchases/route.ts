@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { PLATFORM_FEE_PERCENT } from "@/lib/constants";
+import { rateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
+import { isValidUUID } from "@/lib/validation";
 import Stripe from "stripe";
 
 const stripe = process.env.STRIPE_SECRET_KEY
@@ -11,6 +13,10 @@ const stripe = process.env.STRIPE_SECRET_KEY
 
 // POST /api/purchases — buy Stage 1 or Stage 2
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+  const limited = rateLimit(`purchase:${ip}`, RATE_LIMITS.mutation);
+  if (limited) return limited;
+
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -28,9 +34,16 @@ export async function POST(req: NextRequest) {
 
   const { opportunityId, stage } = await req.json();
 
-  if (!opportunityId || ![1, 2].includes(stage)) {
+  if (!opportunityId || !isValidUUID(opportunityId)) {
     return NextResponse.json(
-      { error: "opportunityId and stage (1 or 2) are required" },
+      { error: "A valid opportunityId is required" },
+      { status: 400 }
+    );
+  }
+
+  if (![1, 2].includes(stage)) {
+    return NextResponse.json(
+      { error: "stage must be 1 or 2" },
       { status: 400 }
     );
   }
@@ -110,7 +123,7 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.NEXTAUTH_URL}/company/${opportunityId}?purchased=stage${stage}`,
+      success_url: `${process.env.NEXTAUTH_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/opportunity/${opportunityId}`,
       metadata: {
         companyId: session.user.id,
