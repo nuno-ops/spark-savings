@@ -68,7 +68,7 @@ export default function NewOpportunityPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">
         Create New Opportunity
       </h1>
 
@@ -78,15 +78,15 @@ export default function NewOpportunityPage() {
         </div>
       )}
 
-      <div className="space-y-6 bg-white border border-gray-200 rounded-xl p-6">
+      <div className="space-y-6 bg-white border border-slate-200 rounded-xl p-6">
         {/* PUBLIC TEASER */}
         <div className="border-b pb-4">
-          <h2 className="font-semibold text-gray-800 mb-3">
+          <h2 className="font-semibold text-slate-800 mb-3">
             Public Teaser (always visible)
           </h2>
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -94,12 +94,12 @@ export default function NewOpportunityPage() {
                 required
                 value={form.title}
                 onChange={(e) => updateField("title", e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 placeholder="e.g. Reduce cloud hosting costs by 40%"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Brief Description <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -107,12 +107,12 @@ export default function NewOpportunityPage() {
                 value={form.brief}
                 onChange={(e) => updateField("brief", e.target.value)}
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 placeholder="A short teaser that makes companies curious..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Company <span className="text-red-500">*</span>
               </label>
               <input
@@ -120,20 +120,20 @@ export default function NewOpportunityPage() {
                 required
                 value={form.company}
                 onChange={(e) => updateField("company", e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 placeholder="e.g. Acme Corp, or type of company this applies to"
               />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1">
                   Category <span className="text-red-500">*</span>
                 </label>
                 <select
                   required
                   value={form.category}
                   onChange={(e) => updateField("category", e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 >
                   {CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
@@ -143,7 +143,7 @@ export default function NewOpportunityPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1">
                   Stage 1 Price <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -152,7 +152,7 @@ export default function NewOpportunityPage() {
                   onChange={(e) =>
                     updateField("stage1Price", parseInt(e.target.value))
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 >
                   {STAGE1_PRICES.map((p) => (
                     <option key={p} value={p}>
@@ -167,12 +167,12 @@ export default function NewOpportunityPage() {
 
         {/* STAGE 1 CONTENT */}
         <div className="border-b pb-4">
-          <h2 className="font-semibold text-gray-800 mb-3">
+          <h2 className="font-semibold text-slate-800 mb-3">
             Stage 1 Content (unlocked after €{form.stage1Price} purchase)
           </h2>
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Validation Checklist <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -182,12 +182,12 @@ export default function NewOpportunityPage() {
                   updateField("validationChecklist", e.target.value)
                 }
                 rows={4}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
                 placeholder="- Check if you spend >€10k/mo on cloud&#10;- Verify you use auto-scaling&#10;- ..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Requirements <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -195,12 +195,12 @@ export default function NewOpportunityPage() {
                 value={form.requirements}
                 onChange={(e) => updateField("requirements", e.target.value)}
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
                 placeholder="What the company needs to have in place..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 High-Level Approach <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -210,7 +210,7 @@ export default function NewOpportunityPage() {
                   updateField("highLevelApproach", e.target.value)
                 }
                 rows={4}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
                 placeholder="The general strategy without step-by-step details..."
               />
             </div>
@@ -219,13 +219,13 @@ export default function NewOpportunityPage() {
 
         {/* STAGE 2 CONTENT */}
         <div className="border-b pb-4">
-          <h2 className="font-semibold text-gray-800 mb-3">
+          <h2 className="font-semibold text-slate-800 mb-3">
             Stage 2 Content (full playbook)
           </h2>
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1">
                   Estimated Savings Low (€) <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -239,11 +239,11 @@ export default function NewOpportunityPage() {
                       parseInt(e.target.value) || 0
                     )
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1">
                   Estimated Savings High (€) <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -257,19 +257,19 @@ export default function NewOpportunityPage() {
                       parseInt(e.target.value) || 0
                     )
                   }
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  className="w-full border border-slate-300 rounded-lg px-3 py-2"
                 />
               </div>
             </div>
 
             {form.savingsEstimateLow > 0 && (
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-500">
                 Suggested Stage 2 price: €{suggestedMin} — €{suggestedMax}
               </p>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Stage 2 Price (€) <span className="text-red-500">*</span>
               </label>
               <input
@@ -280,12 +280,12 @@ export default function NewOpportunityPage() {
                 onChange={(e) =>
                   updateField("stage2Price", parseInt(e.target.value) || 0)
                 }
-                className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Full Playbook <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -293,12 +293,12 @@ export default function NewOpportunityPage() {
                 value={form.fullPlaybook}
                 onChange={(e) => updateField("fullPlaybook", e.target.value)}
                 rows={6}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
                 placeholder="Detailed step-by-step instructions..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Templates / Resources <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -306,7 +306,7 @@ export default function NewOpportunityPage() {
                 value={form.templates}
                 onChange={(e) => updateField("templates", e.target.value)}
                 rows={3}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
                 placeholder="Links, templates, tools..."
               />
             </div>
@@ -318,14 +318,14 @@ export default function NewOpportunityPage() {
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 disabled:opacity-50"
+            className="border border-slate-300 text-slate-700 px-6 py-2 rounded-lg hover:bg-slate-50 disabled:opacity-50"
           >
             Save as Draft
           </button>
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+            className="bg-slate-900 text-white px-6 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-50"
           >
             {saving ? "Saving..." : "Publish"}
           </button>

@@ -56,28 +56,28 @@ export default function ApiKeysPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">API Keys</h1>
-      <p className="text-gray-600 text-sm mb-6">
+      <h1 className="text-2xl font-bold text-slate-900 mb-6">API Keys</h1>
+      <p className="text-slate-600 text-sm mb-6">
         Use API keys to let AI agents submit opportunities on your behalf. Send
-        requests to <code className="bg-gray-100 px-1 rounded">POST /api/agent/submit</code>{" "}
-        with your key in the <code className="bg-gray-100 px-1 rounded">Authorization: Bearer &lt;key&gt;</code>{" "}
+        requests to <code className="bg-slate-100 px-1 rounded">POST /api/agent/submit</code>{" "}
+        with your key in the <code className="bg-slate-100 px-1 rounded">Authorization: Bearer &lt;key&gt;</code>{" "}
         header.
       </p>
 
       {/* Create new key */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-        <h2 className="font-semibold text-gray-800 mb-3">Create New Key</h2>
+      <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+        <h2 className="font-semibold text-slate-800 mb-3">Create New Key</h2>
         <div className="flex gap-3">
           <input
             type="text"
             value={newKeyName}
             onChange={(e) => setNewKeyName(e.target.value)}
             placeholder="Key name (e.g. My Agent)"
-            className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
+            className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm"
           />
           <button
             onClick={createKey}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700"
+            className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800"
           >
             Generate
           </button>
@@ -95,24 +95,24 @@ export default function ApiKeysPage() {
       </div>
 
       {/* Key list */}
-      <div className="bg-white border border-gray-200 rounded-xl p-6">
-        <h2 className="font-semibold text-gray-800 mb-3">Your Keys</h2>
+      <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <h2 className="font-semibold text-slate-800 mb-3">Your Keys</h2>
         {loading ? (
-          <p className="text-gray-500 text-sm">Loading...</p>
+          <p className="text-slate-500 text-sm">Loading...</p>
         ) : keys.length === 0 ? (
-          <p className="text-gray-500 text-sm">No API keys yet.</p>
+          <p className="text-slate-500 text-sm">No API keys yet.</p>
         ) : (
           <div className="space-y-3">
             {keys.map((key) => (
               <div
                 key={key.id}
-                className="flex items-center justify-between border border-gray-100 rounded-lg p-3"
+                className="flex items-center justify-between border border-slate-100 rounded-lg p-3"
               >
                 <div>
-                  <span className="font-medium text-gray-800 text-sm">
+                  <span className="font-medium text-slate-800 text-sm">
                     {key.name}
                   </span>
-                  <span className="text-xs text-gray-400 ml-2">
+                  <span className="text-xs text-slate-400 ml-2">
                     {key.keyPrefix}...
                   </span>
                   {key.revoked && (
