@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { triageOpportunity } from "@/lib/triage";
+import { companyMatchScore, MATCH_THRESHOLD } from "@/lib/company-match";
 import { STAGE1_PRICES, CATEGORIES } from "@/lib/constants";
 import { rateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
 import {
@@ -68,6 +69,11 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: "desc" },
   });
 
+  // Check if caller is a company user with a companyName for matching
+  const session = await getServerSession(authOptions);
+  const userCompanyName =
+    session?.user?.role === "company" ? session.user.companyName : undefined;
+
   const result = opportunities.map((opp) => {
     const ratings = opp.reviews.map((r) => r.rating);
     const reviewCount = ratings.length;
@@ -78,8 +84,25 @@ export async function GET(req: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { reviews, contributor, ...rest } = opp;
     // Anonymize contributor in public listings — identity revealed after Stage 2
-    return { ...rest, contributor: { name: "Expert Contributor" }, avgRating, reviewCount };
+    return {
+      ...rest,
+      contributor: { name: "Expert Contributor" },
+      avgRating,
+      reviewCount,
+      matchesCompany: userCompanyName
+        ? companyMatchScore(opp.company, userCompanyName) >= MATCH_THRESHOLD
+        : false,
+    };
   });
+
+  // Sort matched opportunities first, preserve createdAt order within groups
+  if (userCompanyName) {
+    result.sort((a, b) => {
+      if (a.matchesCompany && !b.matchesCompany) return -1;
+      if (!a.matchesCompany && b.matchesCompany) return 1;
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+  }
 
   return NextResponse.json(result);
 }

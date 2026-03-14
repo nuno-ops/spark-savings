@@ -14,6 +14,7 @@ model User {
   name           String
   passwordHash   String
   role           String   @default("contributor") // "contributor" | "company" | "admin"
+  companyName    String?  // Company name for matching (company-role users only)
   suspended      Boolean  @default(false)
   createdAt      DateTime @default(now())
 

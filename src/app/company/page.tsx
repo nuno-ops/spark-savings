@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   DollarSign, ExternalLink, RotateCcw, ShoppingBag,
-  Target, Plus, Calendar, Tag, Building2,
+  Target, Plus, Calendar, Tag, Building2, Check, Info,
 } from "lucide-react";
 
 type CompanyTab = "purchases" | "requests";
@@ -40,6 +40,10 @@ export default function CompanyDashboard() {
   const [requests, setRequests] = useState<CompanyRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [requestsLoaded, setRequestsLoaded] = useState(false);
+  const [companyName, setCompanyName] = useState("");
+  const [savedCompanyName, setSavedCompanyName] = useState("");
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [profileSaved, setProfileSaved] = useState(false);
 
   // Load purchases on auth
   useEffect(() => {
@@ -51,6 +55,13 @@ export default function CompanyDashboard() {
       .then((data) => {
         setPurchases(Array.isArray(data) ? data : []);
         setLoading(false);
+      });
+
+    fetch("/api/profile")
+      .then((r) => r.json())
+      .then((data) => {
+        setCompanyName(data.companyName || "");
+        setSavedCompanyName(data.companyName || "");
       });
   }, [status, router]);
 
@@ -73,6 +84,22 @@ export default function CompanyDashboard() {
     } else {
       const data = await res.json();
       alert(data.error || "Refund request failed");
+    }
+  }
+
+  async function saveCompanyName() {
+    setSavingProfile(true);
+    setProfileSaved(false);
+    const res = await fetch("/api/profile", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ companyName: companyName.trim() }),
+    });
+    setSavingProfile(false);
+    if (res.ok) {
+      setSavedCompanyName(companyName.trim());
+      setProfileSaved(true);
+      setTimeout(() => setProfileSaved(false), 4000);
     }
   }
 
@@ -142,6 +169,45 @@ export default function CompanyDashboard() {
           <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Spent</p>
           <p className="text-2xl font-bold text-slate-900">&euro;{totalSpent.toLocaleString()}</p>
         </div>
+      </div>
+
+      {/* Company Profile */}
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5 mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Building2 className="w-4 h-4 text-slate-500" />
+          <h2 className="text-sm font-semibold text-slate-900">Company Profile</h2>
+        </div>
+        <div className="flex items-end gap-3">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-slate-500 mb-1">Company Name</label>
+            <input
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              placeholder="e.g. Acme Corporation"
+              className="w-full border border-slate-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+            />
+          </div>
+          <button
+            onClick={saveCompanyName}
+            disabled={savingProfile || companyName.trim() === savedCompanyName}
+            className="inline-flex items-center gap-1.5 bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800 disabled:opacity-40"
+          >
+            {savingProfile ? "Saving..." : "Save"}
+          </button>
+        </div>
+        {profileSaved && (
+          <div className="flex items-center gap-1.5 text-emerald-600 text-xs mt-2">
+            <Check className="w-3.5 h-3.5" />
+            Saved! Sign out and back in to see updated marketplace recommendations.
+          </div>
+        )}
+        {!savedCompanyName && (
+          <div className="flex items-center gap-1.5 text-slate-400 text-xs mt-2">
+            <Info className="w-3.5 h-3.5" />
+            Set your company name to see relevant opportunities highlighted in the marketplace.
+          </div>
+        )}
       </div>
 
       {/* Tab bar */}
