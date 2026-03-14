@@ -2,20 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-04-30.basil" as Stripe.LatestApiVersion,
-});
-
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+// Lazy-init to avoid build-time crash when env vars aren't set
+const getStripe = () => {
+  if (!process.env.STRIPE_SECRET_KEY) throw new Error("STRIPE_SECRET_KEY not set");
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-04-30.basil" as Stripe.LatestApiVersion,
+  });
+};
 
 // POST /api/webhooks/stripe — Stripe event handler
 export async function POST(req: NextRequest) {
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!process.env.STRIPE_SECRET_KEY || !webhookSecret) {
     return NextResponse.json(
       { error: "Stripe not configured" },
       { status: 500 }
     );
   }
+
+  const stripe = getStripe();
 
   const body = await req.text();
   const signature = req.headers.get("stripe-signature");
