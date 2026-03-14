@@ -3,16 +3,16 @@ import Link from "next/link";
 export default function TermsOfServicePage() {
   return (
     <div className="max-w-3xl mx-auto py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">
+      <h1 className="text-3xl font-bold text-slate-900 mb-2">
         Terms of Service
       </h1>
-      <p className="text-sm text-gray-500 mb-8">
+      <p className="text-sm text-slate-500 mb-8">
         Last updated: February 26, 2026
       </p>
 
-      <div className="prose prose-gray max-w-none space-y-8 text-gray-700 text-[15px] leading-relaxed">
+      <div className="prose prose-gray max-w-none space-y-8 text-slate-700 text-[15px] leading-relaxed">
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-0">
+          <h2 className="text-xl font-semibold text-slate-900 mt-0">
             1. Overview
           </h2>
           <p>
@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             2. Account Registration
           </h2>
           <p>
@@ -44,7 +44,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             3. How the Marketplace Works
           </h2>
           <p>
@@ -73,7 +73,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             4. Payments and Fees
           </h2>
           <p>
@@ -88,7 +88,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             5. Refund Policy
           </h2>
           <p>
@@ -106,7 +106,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             6. Contributor Obligations
           </h2>
           <p>Contributors agree to:</p>
@@ -133,7 +133,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             7. API Access
           </h2>
           <p>
@@ -146,7 +146,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             8. Intellectual Property
           </h2>
           <p>
@@ -162,7 +162,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             9. Content Moderation
           </h2>
           <p>
@@ -179,7 +179,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             10. Limitation of Liability
           </h2>
           <p>
@@ -196,7 +196,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             11. Termination
           </h2>
           <p>
@@ -209,7 +209,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             12. Governing Law
           </h2>
           <p>
@@ -222,7 +222,7 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             13. Changes to These Terms
           </h2>
           <p>
@@ -234,12 +234,12 @@ export default function TermsOfServicePage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">14. Contact</h2>
+          <h2 className="text-xl font-semibold text-slate-900">14. Contact</h2>
           <p>
             If you have questions about these Terms, please contact us at{" "}
             <a
               href="mailto:legal@sparkdeal.app"
-              className="text-indigo-600 hover:text-indigo-800"
+              className="text-emerald-600 hover:text-emerald-700"
             >
               legal@sparkdeal.app
             </a>
@@ -248,12 +248,12 @@ export default function TermsOfServicePage() {
         </section>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-gray-200 text-sm text-gray-500">
-        <Link href="/legal/privacy" className="text-indigo-600 hover:underline">
+      <div className="mt-12 pt-8 border-t border-slate-200 text-sm text-slate-500">
+        <Link href="/legal/privacy" className="text-emerald-600 hover:underline">
           Privacy Policy
         </Link>
         <span className="mx-2">&middot;</span>
-        <Link href="/" className="text-indigo-600 hover:underline">
+        <Link href="/" className="text-emerald-600 hover:underline">
           Back to Home
         </Link>
       </div>

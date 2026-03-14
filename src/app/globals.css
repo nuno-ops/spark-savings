@@ -16,14 +16,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth transitions globally */
-*, *::before, *::after {
+/* Smooth transitions for interactive elements only */
+a, button, input, select, textarea,
+[role="button"], [tabindex] {
   transition-property: color, background-color, border-color, box-shadow, opacity;
   transition-timing-function: ease;
   transition-duration: 120ms;
-}
-
-/* Remove transition from layout properties to avoid jank */
-[class*="transition-"] {
-  transition-property: all;
 }

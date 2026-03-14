@@ -3,14 +3,14 @@ import Link from "next/link";
 export default function PrivacyPolicyPage() {
   return (
     <div className="max-w-3xl mx-auto py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
-      <p className="text-sm text-gray-500 mb-8">
+      <h1 className="text-3xl font-bold text-slate-900 mb-2">Privacy Policy</h1>
+      <p className="text-sm text-slate-500 mb-8">
         Last updated: February 26, 2026
       </p>
 
-      <div className="prose prose-gray max-w-none space-y-8 text-gray-700 text-[15px] leading-relaxed">
+      <div className="prose prose-gray max-w-none space-y-8 text-slate-700 text-[15px] leading-relaxed">
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-0">
+          <h2 className="text-xl font-semibold text-slate-900 mt-0">
             1. Introduction
           </h2>
           <p>
@@ -27,11 +27,11 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             2. Data We Collect
           </h2>
 
-          <h3 className="text-lg font-medium text-gray-800 mt-4">
+          <h3 className="text-lg font-medium text-slate-800 mt-4">
             2.1 Information You Provide
           </h3>
           <ul className="list-disc pl-6 space-y-1">
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
             </li>
           </ul>
 
-          <h3 className="text-lg font-medium text-gray-800 mt-4">
+          <h3 className="text-lg font-medium text-slate-800 mt-4">
             2.2 Information Collected Automatically
           </h3>
           <ul className="list-disc pl-6 space-y-1">
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
             </li>
           </ul>
 
-          <h3 className="text-lg font-medium text-gray-800 mt-4">
+          <h3 className="text-lg font-medium text-slate-800 mt-4">
             2.3 Information We Do Not Collect
           </h3>
           <ul className="list-disc pl-6 space-y-1">
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             3. How We Use Your Data
           </h2>
           <p>We use your personal data for the following purposes:</p>
@@ -119,7 +119,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             4. Legal Basis for Processing (GDPR)
           </h2>
           <p>We process your data under the following legal bases:</p>
@@ -145,7 +145,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             5. Data Sharing
           </h2>
           <p>We share your personal data only in the following circumstances:</p>
@@ -171,7 +171,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             6. Cookies
           </h2>
           <p>We use the following types of cookies:</p>
@@ -193,7 +193,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             7. Data Retention
           </h2>
           <ul className="list-disc pl-6 space-y-1">
@@ -219,7 +219,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             8. Your Rights (GDPR)
           </h2>
           <p>Under the GDPR, you have the right to:</p>
@@ -257,7 +257,7 @@ export default function PrivacyPolicyPage() {
             To exercise any of these rights, contact us at{" "}
             <a
               href="mailto:privacy@sparkdeal.app"
-              className="text-indigo-600 hover:text-indigo-800"
+              className="text-emerald-600 hover:text-emerald-700"
             >
               privacy@sparkdeal.app
             </a>
@@ -266,7 +266,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             9. Data Security
           </h2>
           <p>We protect your data through:</p>
@@ -285,7 +285,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             10. International Data Transfers
           </h2>
           <p>
@@ -298,7 +298,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             11. Children&apos;s Privacy
           </h2>
           <p>
@@ -310,7 +310,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             12. Changes to This Policy
           </h2>
           <p>
@@ -322,7 +322,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">13. Contact</h2>
+          <h2 className="text-xl font-semibold text-slate-900">13. Contact</h2>
           <p>
             For privacy-related inquiries or to exercise your data rights,
             contact our Data Protection team:
@@ -331,7 +331,7 @@ export default function PrivacyPolicyPage() {
             Email:{" "}
             <a
               href="mailto:privacy@sparkdeal.app"
-              className="text-indigo-600 hover:text-indigo-800"
+              className="text-emerald-600 hover:text-emerald-700"
             >
               privacy@sparkdeal.app
             </a>
@@ -339,7 +339,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-xl font-semibold text-slate-900">
             14. Supervisory Authority
           </h2>
           <p>
@@ -350,12 +350,12 @@ export default function PrivacyPolicyPage() {
         </section>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-gray-200 text-sm text-gray-500">
-        <Link href="/legal/terms" className="text-indigo-600 hover:underline">
+      <div className="mt-12 pt-8 border-t border-slate-200 text-sm text-slate-500">
+        <Link href="/legal/terms" className="text-emerald-600 hover:underline">
           Terms of Service
         </Link>
         <span className="mx-2">&middot;</span>
-        <Link href="/" className="text-indigo-600 hover:underline">
+        <Link href="/" className="text-emerald-600 hover:underline">
           Back to Home
         </Link>
       </div>

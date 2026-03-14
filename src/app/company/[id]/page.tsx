@@ -55,7 +55,7 @@ function StarPicker({
           key={i}
           type="button"
           className={`text-2xl transition-colors ${
-            i <= (hover || rating) ? "text-yellow-400" : "text-gray-300"
+            i <= (hover || rating) ? "text-yellow-400" : "text-slate-300"
           } hover:text-yellow-400`}
           onMouseEnter={() => setHover(i)}
           onMouseLeave={() => setHover(0)}
@@ -210,7 +210,7 @@ export default function CompanyOpportunityPage() {
     setReviewSaving(false);
   }
 
-  if (loading) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-slate-500">Loading...</p>;
   if (!opp) return <p className="text-red-600">Not found.</p>;
 
   const hasStage1 = opp.hasStage1;
@@ -219,41 +219,41 @@ export default function CompanyOpportunityPage() {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <Link href="/company" className="text-indigo-600 text-sm hover:underline">
+      <Link href="/company" className="text-emerald-600 text-sm hover:underline">
         &larr; Back to dashboard
       </Link>
 
-      <h1 className="text-2xl font-bold text-gray-900 mt-4 mb-2">
+      <h1 className="text-2xl font-bold text-slate-900 mt-4 mb-2">
         {opp.title}
       </h1>
 
       {/* Stage 1 content */}
       {opp.validationChecklist && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
           {opp.watermark && (
             <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs px-3 py-2 rounded mb-4">
               {opp.watermark}
             </div>
           )}
-          <h2 className="font-semibold text-gray-800 mb-3">
+          <h2 className="font-semibold text-slate-800 mb-3">
             Stage 1 — Unlocked
           </h2>
-          <div className="space-y-3 text-sm text-gray-600">
+          <div className="space-y-3 text-sm text-slate-600">
             <div>
-              <h3 className="font-medium text-gray-700">Validation Checklist</h3>
-              <div className="whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+              <h3 className="font-medium text-slate-700">Validation Checklist</h3>
+              <div className="whitespace-pre-wrap bg-slate-50 p-3 rounded mt-1">
                 {opp.validationChecklist}
               </div>
             </div>
             <div>
-              <h3 className="font-medium text-gray-700">Requirements</h3>
-              <div className="whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+              <h3 className="font-medium text-slate-700">Requirements</h3>
+              <div className="whitespace-pre-wrap bg-slate-50 p-3 rounded mt-1">
                 {opp.requirements}
               </div>
             </div>
             <div>
-              <h3 className="font-medium text-gray-700">High-Level Approach</h3>
-              <div className="whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+              <h3 className="font-medium text-slate-700">High-Level Approach</h3>
+              <div className="whitespace-pre-wrap bg-slate-50 p-3 rounded mt-1">
                 {opp.highLevelApproach}
               </div>
             </div>
@@ -263,22 +263,22 @@ export default function CompanyOpportunityPage() {
 
       {/* Stage 2 content */}
       {opp.fullPlaybook && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
           {opp.watermark2 && (
             <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs px-3 py-2 rounded mb-4">
               {opp.watermark2}
             </div>
           )}
-          <h2 className="font-semibold text-gray-800 mb-3">
+          <h2 className="font-semibold text-slate-800 mb-3">
             Stage 2 — Full Playbook
           </h2>
-          <div className="whitespace-pre-wrap bg-gray-50 p-3 rounded text-sm text-gray-600">
+          <div className="whitespace-pre-wrap bg-slate-50 p-3 rounded text-sm text-slate-600">
             {opp.fullPlaybook}
           </div>
           {opp.templates && (
             <div className="mt-3">
-              <h3 className="font-medium text-gray-700 text-sm">Templates</h3>
-              <div className="whitespace-pre-wrap bg-gray-50 p-3 rounded text-sm text-gray-600 mt-1">
+              <h3 className="font-medium text-slate-700 text-sm">Templates</h3>
+              <div className="whitespace-pre-wrap bg-slate-50 p-3 rounded text-sm text-slate-600 mt-1">
                 {opp.templates}
               </div>
             </div>
@@ -288,8 +288,8 @@ export default function CompanyOpportunityPage() {
 
       {/* Review Form (visible if company has any purchase) */}
       {hasPurchase && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-          <h2 className="font-semibold text-gray-800 mb-3">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+          <h2 className="font-semibold text-slate-800 mb-3">
             {existingReview ? "Your Review" : "Leave a Review"}
           </h2>
 
@@ -305,21 +305,21 @@ export default function CompanyOpportunityPage() {
           )}
 
           <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 mb-1">
               Rating
             </label>
             <StarPicker rating={reviewRating} onSelect={setReviewRating} />
           </div>
 
           <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 mb-1">
               Comment (optional)
             </label>
             <textarea
               value={reviewComment}
               onChange={(e) => setReviewComment(e.target.value)}
               rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
               placeholder="Share your experience with this opportunity..."
             />
           </div>
@@ -327,7 +327,7 @@ export default function CompanyOpportunityPage() {
           <button
             onClick={submitReview}
             disabled={reviewSaving || reviewRating === 0}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 disabled:opacity-50"
+            className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800 disabled:opacity-50"
           >
             {reviewSaving
               ? "Submitting..."
@@ -340,11 +340,11 @@ export default function CompanyOpportunityPage() {
 
       {/* Messaging (Stage 2 only) */}
       {hasStage2 && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6 mb-6">
-          <h2 className="font-semibold text-gray-800 mb-3">Messages</h2>
+        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+          <h2 className="font-semibold text-slate-800 mb-3">Messages</h2>
           <div className="space-y-3 max-h-80 overflow-y-auto mb-4">
             {messages.length === 0 ? (
-              <p className="text-sm text-gray-400">No messages yet.</p>
+              <p className="text-sm text-slate-400">No messages yet.</p>
             ) : (
               messages.map((msg) => (
                 <div
@@ -352,12 +352,12 @@ export default function CompanyOpportunityPage() {
                   className={`p-3 rounded-lg text-sm ${
                     msg.sender.role === "company"
                       ? "bg-blue-50 text-blue-900 ml-8"
-                      : "bg-gray-50 text-gray-800 mr-8"
+                      : "bg-slate-50 text-slate-800 mr-8"
                   }`}
                 >
                   <div className="font-medium text-xs mb-1">
                     {msg.sender.name}{" "}
-                    <span className="text-gray-400">
+                    <span className="text-slate-400">
                       {new Date(msg.createdAt).toLocaleString()}
                     </span>
                   </div>
@@ -372,12 +372,12 @@ export default function CompanyOpportunityPage() {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm"
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
             <button
               onClick={sendMessage}
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700"
+              className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800"
             >
               Send
             </button>
@@ -387,13 +387,13 @@ export default function CompanyOpportunityPage() {
 
       {/* Meeting requests (Stage 2 only) */}
       {hasStage2 && (
-        <div className="bg-white border border-gray-200 rounded-xl p-6">
-          <h2 className="font-semibold text-gray-800 mb-3">Meetings</h2>
+        <div className="bg-white border border-slate-200 rounded-xl p-6">
+          <h2 className="font-semibold text-slate-800 mb-3">Meetings</h2>
 
           {meetings.map((m) => (
             <div
               key={m.id}
-              className="border border-gray-100 rounded-lg p-3 mb-3 text-sm"
+              className="border border-slate-100 rounded-lg p-3 mb-3 text-sm"
             >
               <div className="flex justify-between">
                 <span className="font-medium">
@@ -404,7 +404,7 @@ export default function CompanyOpportunityPage() {
                     m.status === "confirmed"
                       ? "bg-green-100 text-green-700"
                       : m.status === "completed"
-                        ? "bg-gray-100 text-gray-600"
+                        ? "bg-slate-100 text-slate-600"
                         : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
@@ -412,12 +412,12 @@ export default function CompanyOpportunityPage() {
                 </span>
               </div>
               {m.confirmedTime && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   Confirmed: {m.confirmedTime}
                 </p>
               )}
               {!m.confirmedTime && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   Proposed: {JSON.parse(m.proposedTimes).join(", ")}
                 </p>
               )}
@@ -425,7 +425,7 @@ export default function CompanyOpportunityPage() {
           ))}
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 mb-1">
               Request a Meeting
             </label>
             <input
@@ -433,7 +433,7 @@ export default function CompanyOpportunityPage() {
               value={proposedTimes}
               onChange={(e) => setProposedTimes(e.target.value)}
               placeholder="Enter proposed times, comma-separated (e.g. Mon 2pm, Tue 10am)"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mb-2"
+              className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm mb-2"
             />
             <button
               onClick={requestMeeting}
@@ -447,14 +447,14 @@ export default function CompanyOpportunityPage() {
 
       {/* Stage 2 not purchased */}
       {!hasStage2 && opp.stage2Price > 0 && session && (
-        <div className="bg-gray-50 border border-dashed border-gray-300 rounded-lg p-8 text-center">
-          <p className="text-gray-500 mb-2">
+        <div className="bg-slate-50 border border-dashed border-slate-300 rounded-lg p-8 text-center">
+          <p className="text-slate-500 mb-2">
             Unlock Stage 2 to access the full playbook, messaging, and meeting
             requests.
           </p>
           <Link
             href={`/opportunity/${id}`}
-            className="text-indigo-600 underline text-sm"
+            className="text-emerald-600 underline text-sm"
           >
             Go to opportunity page to purchase
           </Link>
