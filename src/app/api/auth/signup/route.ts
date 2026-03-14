@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   if (limited) return limited;
 
   try {
-    const { email, password, name, role } = await req.json();
+    const { email, password, name, role, companyName } = await req.json();
 
     if (!email || !password || !name || !role) {
       return NextResponse.json(
@@ -66,8 +66,20 @@ export async function POST(req: NextRequest) {
     const passwordHash = await bcrypt.hash(password, 10);
     const sanitizedName = sanitizeText(name);
 
+    // Optional companyName for company-role users
+    const sanitizedCompanyName =
+      role === "company" && companyName && typeof companyName === "string" && companyName.trim()
+        ? sanitizeText(companyName.trim()).slice(0, MAX_LENGTHS.company)
+        : undefined;
+
     const user = await prisma.user.create({
-      data: { email: email.toLowerCase().trim(), name: sanitizedName, passwordHash, role },
+      data: {
+        email: email.toLowerCase().trim(),
+        name: sanitizedName,
+        passwordHash,
+        role,
+        ...(sanitizedCompanyName ? { companyName: sanitizedCompanyName } : {}),
+      },
     });
 
     return NextResponse.json(

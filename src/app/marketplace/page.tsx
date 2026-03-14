@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/constants";
-import { Search, Star, Package, SlidersHorizontal, UserRound } from "lucide-react";
+import { Search, Star, Package, SlidersHorizontal, UserRound, Building2, Sparkles } from "lucide-react";
 
 interface Opportunity {
   id: string;
@@ -18,6 +18,7 @@ interface Opportunity {
   reviewCount: number;
   createdAt: string;
   contributor: { name: string };
+  matchesCompany: boolean;
 }
 
 function StarRating({ rating, count }: { rating: number; count: number }) {
@@ -158,12 +159,24 @@ export default function HomePage() {
             <Link
               key={opp.id}
               href={`/opportunity/${opp.id}`}
-              className="group bg-white rounded-lg border border-slate-200 p-5 shadow-sm hover:shadow-md hover:border-slate-300"
+              className={`group bg-white rounded-lg border p-5 shadow-sm hover:shadow-md ${
+                opp.matchesCompany
+                  ? "border-emerald-200 border-l-4 border-l-emerald-400 hover:border-emerald-300"
+                  : "border-slate-200 hover:border-slate-300"
+              }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded capitalize">
-                  {opp.category}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded capitalize">
+                    {opp.category}
+                  </span>
+                  {opp.matchesCompany && (
+                    <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                      <Sparkles className="w-3 h-3" />
+                      Relevant to you
+                    </span>
+                  )}
+                </div>
                 <span className="text-sm font-semibold text-emerald-600">
                   &euro;{opp.stage1Price}
                 </span>
@@ -176,10 +189,18 @@ export default function HomePage() {
                 <StarRating rating={opp.avgRating} count={opp.reviewCount} />
               </div>
               <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
-                <span className="inline-flex items-center gap-1">
-                  <UserRound className="w-3 h-3" />
-                  Expert Contributor
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex items-center gap-1">
+                    <UserRound className="w-3 h-3" />
+                    Expert Contributor
+                  </span>
+                  {opp.company && (
+                    <span className="inline-flex items-center gap-1">
+                      <Building2 className="w-3 h-3" />
+                      {opp.company}
+                    </span>
+                  )}
+                </div>
                 <span className="flex items-center gap-1">
                   <SlidersHorizontal className="w-3 h-3" />
                   {Math.round(opp.confidenceScore)}/100
