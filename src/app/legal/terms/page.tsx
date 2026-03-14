@@ -16,7 +16,7 @@ export default function TermsOfServicePage() {
             1. Overview
           </h2>
           <p>
-            Spark Savings (&quot;Platform&quot;, &quot;we&quot;, &quot;us&quot;)
+            Spark Deal (&quot;Platform&quot;, &quot;we&quot;, &quot;us&quot;)
             operates a marketplace where contributors submit cost-saving
             strategies and companies purchase access to those strategies. By
             creating an account or using the Platform, you agree to these Terms
@@ -151,12 +151,12 @@ export default function TermsOfServicePage() {
           </h2>
           <p>
             Contributors retain ownership of their submitted content.By
-            publishing on the Platform, contributors grant Spark Savings a
+            publishing on the Platform, contributors grant Spark Deal a
             non-exclusive license to display, distribute, and facilitate the sale
             of their content through the marketplace.
           </p>
           <p>
-            The Spark Savings brand, logo, and platform software are owned by us
+            The Spark Deal brand, logo, and platform software are owned by us
             and may not be used without written permission.
           </p>
         </section>
@@ -183,13 +183,13 @@ export default function TermsOfServicePage() {
             10. Limitation of Liability
           </h2>
           <p>
-            Spark Savings is a marketplace connecting contributors and companies.
+            Spark Deal is a marketplace connecting contributors and companies.
             We do not guarantee the accuracy, completeness, or effectiveness of
             any cost-saving strategy listed on the Platform. Savings estimates
             are provided by contributors and are not verified by us.
           </p>
           <p>
-            To the maximum extent permitted by law, Spark Savings shall not be
+            To the maximum extent permitted by law, Spark Deal shall not be
             liable for any indirect, incidental, or consequential damages arising
             from the use of the Platform or any content purchased through it.
           </p>
@@ -215,7 +215,7 @@ export default function TermsOfServicePage() {
           <p>
             These Terms are governed by and construed in accordance with the laws
             of the European Union and the applicable national laws of the
-            jurisdiction in which Spark Savings operates. Any disputes arising
+            jurisdiction in which Spark Deal operates. Any disputes arising
             from these Terms shall be resolved in the competent courts of that
             jurisdiction.
           </p>
@@ -238,10 +238,10 @@ export default function TermsOfServicePage() {
           <p>
             If you have questions about these Terms, please contact us at{" "}
             <a
-              href="mailto:legal@sparksavings.com"
+              href="mailto:legal@sparkdeal.app"
               className="text-indigo-600 hover:text-indigo-800"
             >
-              legal@sparksavings.com
+              legal@sparkdeal.app
             </a>
             .
           </p>

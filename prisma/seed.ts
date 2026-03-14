@@ -7,10 +7,10 @@ async function main() {
   // Create admin user
   const adminHash = await bcrypt.hash("admin123", 10);
   const admin = await prisma.user.upsert({
-    where: { email: "admin@sparksavings.com" },
+    where: { email: "admin@sparkdeal.app" },
     update: {},
     create: {
-      email: "admin@sparksavings.com",
+      email: "admin@sparkdeal.app",
       name: "Admin",
       passwordHash: adminHash,
       role: "admin",

@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
             1. Introduction
           </h2>
           <p>
-            Spark Savings (&quot;Platform&quot;, &quot;we&quot;, &quot;us&quot;)
+            Spark Deal (&quot;Platform&quot;, &quot;we&quot;, &quot;us&quot;)
             is committed to protecting your privacy. This Privacy Policy explains
             how we collect, use, store, and share your personal data when you use
             our marketplace platform. This policy applies to all users including
@@ -256,10 +256,10 @@ export default function PrivacyPolicyPage() {
           <p>
             To exercise any of these rights, contact us at{" "}
             <a
-              href="mailto:privacy@sparksavings.com"
+              href="mailto:privacy@sparkdeal.app"
               className="text-indigo-600 hover:text-indigo-800"
             >
-              privacy@sparksavings.com
+              privacy@sparkdeal.app
             </a>
             . We will respond within 30 days.
           </p>
@@ -330,10 +330,10 @@ export default function PrivacyPolicyPage() {
           <p>
             Email:{" "}
             <a
-              href="mailto:privacy@sparksavings.com"
+              href="mailto:privacy@sparkdeal.app"
               className="text-indigo-600 hover:text-indigo-800"
             >
-              privacy@sparksavings.com
+              privacy@sparkdeal.app
             </a>
           </p>
         </section>

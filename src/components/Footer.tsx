@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-1.5 text-base font-bold text-slate-900">
               <Zap className="w-4 h-4 text-emerald-500" />
-              Spark Savings
+              Spark Deal
             </Link>
             <p className="text-sm text-slate-500 mt-2 leading-relaxed">
               The marketplace for cost-saving strategies. Submit ideas, unlock savings.
@@ -67,13 +67,13 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="mailto:support@sparksavings.com" className="text-slate-600 hover:text-slate-900">
-                  support@sparksavings.com
+                <a href="mailto:support@sparkdeal.app" className="text-slate-600 hover:text-slate-900">
+                  support@sparkdeal.app
                 </a>
               </li>
               <li>
-                <a href="mailto:legal@sparksavings.com" className="text-slate-600 hover:text-slate-900">
-                  legal@sparksavings.com
+                <a href="mailto:legal@sparkdeal.app" className="text-slate-600 hover:text-slate-900">
+                  legal@sparkdeal.app
                 </a>
               </li>
             </ul>
@@ -82,7 +82,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400">
-          <p>&copy; {new Date().getFullYear()} Spark Savings. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Spark Deal. All rights reserved.</p>
           <div className="flex gap-4 mt-2 sm:mt-0">
             <Link href="/legal/terms" className="hover:text-slate-600">Terms</Link>
             <Link href="/legal/privacy" className="hover:text-slate-600">Privacy</Link>

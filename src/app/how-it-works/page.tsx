@@ -3,7 +3,7 @@ export default function HowItWorksPage() {
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">How It Works</h1>
       <p className="text-gray-600 mb-10">
-        Spark Savings connects expert contributors who identify savings
+        Spark Deal connects expert contributors who identify savings
         opportunities with companies looking to cut costs.
       </p>
 
@@ -219,7 +219,7 @@ export default function HowItWorksPage() {
             <p className="text-sm text-gray-500">
               Companies can request a refund within{" "}
               <span className="font-medium text-gray-900">48 hours</span> of
-              purchase. Refunds are reviewed by the Spark Savings team.
+              purchase. Refunds are reviewed by the Spark Deal team.
             </p>
           </div>
         </div>
