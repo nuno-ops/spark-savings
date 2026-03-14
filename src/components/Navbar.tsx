@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-14">
         <Link href="/" className="flex items-center gap-1.5 text-lg font-bold tracking-tight text-slate-900">
           <Zap className="w-5 h-5 text-emerald-500" />
-          Spark Savings
+          Spark Deal
         </Link>
 
         <div className="flex items-center gap-1">

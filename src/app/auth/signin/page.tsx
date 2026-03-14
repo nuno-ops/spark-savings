@@ -41,7 +41,7 @@ function SignInForm() {
         <div className="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white rounded-lg mb-4">
           <Zap className="w-5 h-5" />
         </div>
-        <h1 className="text-xl font-bold text-slate-900">Sign in to Spark Savings</h1>
+        <h1 className="text-xl font-bold text-slate-900">Sign in to Spark Deal</h1>
         <p className="text-sm text-slate-500 mt-1">Welcome back. Enter your credentials to continue.</p>
       </div>
 

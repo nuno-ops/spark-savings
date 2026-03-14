@@ -11,7 +11,7 @@ function getResend(): Resend | null {
 
 // ─── From address ────────────────────────────────────────────
 const FROM =
-  process.env.EMAIL_FROM || "Spark Savings <noreply@sparksavings.com>";
+  process.env.EMAIL_FROM || "Spark Deal <noreply@sparkdeal.app>";
 
 // ─── Password Reset Email ────────────────────────────────────
 export async function sendPasswordResetEmail(
@@ -36,7 +36,7 @@ export async function sendPasswordResetEmail(
     await client.emails.send({
       from: FROM,
       to,
-      subject: "Reset your Spark Savings password",
+      subject: "Reset your Spark Deal password",
       html: passwordResetHtml(resetUrl),
     });
     return true;
@@ -58,7 +58,7 @@ function passwordResetHtml(resetUrl: string): string {
       <table width="480" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
         <!-- Header -->
         <tr><td style="background:#0f172a;padding:24px 32px;text-align:center;">
-          <span style="color:#34d399;font-size:20px;font-weight:700;">⚡ Spark Savings</span>
+          <span style="color:#34d399;font-size:20px;font-weight:700;">⚡ Spark Deal</span>
         </td></tr>
         <!-- Body -->
         <tr><td style="padding:32px;">
@@ -81,7 +81,7 @@ function passwordResetHtml(resetUrl: string): string {
         <!-- Footer -->
         <tr><td style="padding:16px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
           <p style="margin:0;font-size:12px;color:#94a3b8;">
-            &copy; ${new Date().getFullYear()} Spark Savings. All rights reserved.
+            &copy; ${new Date().getFullYear()} Spark Deal. All rights reserved.
           </p>
         </td></tr>
       </table>

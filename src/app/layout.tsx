@@ -5,10 +5,17 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 
+function getSiteUrl(): string {
+  const raw = process.env.NEXTAUTH_URL || "https://sparkdeal.app";
+  // Auto-prepend https:// if the URL has no protocol
+  if (!/^https?:\/\//i.test(raw)) return `https://${raw}`;
+  return raw;
+}
+
 export const metadata: Metadata = {
   title: {
-    default: "Spark Savings — Cost-Saving Opportunities Marketplace",
-    template: "%s | Spark Savings",
+    default: "Spark Deal — Cost-Saving Opportunities Marketplace",
+    template: "%s | Spark Deal",
   },
   description:
     "Discover proven cost-saving strategies from expert contributors. Browse opportunities, unlock playbooks, and reduce business expenses across technology, procurement, energy, and more.",
@@ -22,15 +29,15 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    siteName: "Spark Savings",
-    title: "Spark Savings — Cost-Saving Opportunities Marketplace",
+    siteName: "Spark Deal",
+    title: "Spark Deal — Cost-Saving Opportunities Marketplace",
     description:
       "Discover proven cost-saving strategies from expert contributors. Browse opportunities, unlock playbooks, and reduce business expenses.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spark Savings — Cost-Saving Opportunities Marketplace",
+    title: "Spark Deal — Cost-Saving Opportunities Marketplace",
     description:
       "Discover proven cost-saving strategies from expert contributors.",
   },
@@ -38,9 +45,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL(
-    process.env.NEXTAUTH_URL || "https://sparksavings.com"
-  ),
+  metadataBase: new URL(getSiteUrl()),
 };
 
 export default function RootLayout({

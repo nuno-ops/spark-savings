@@ -45,7 +45,7 @@ export default function SignUpPage() {
           <Zap className="w-5 h-5" />
         </div>
         <h1 className="text-xl font-bold text-slate-900">Create an account</h1>
-        <p className="text-sm text-slate-500 mt-1">Get started with Spark Savings for free.</p>
+        <p className="text-sm text-slate-500 mt-1">Get started with Spark Deal for free.</p>
       </div>
 
       {error && (
