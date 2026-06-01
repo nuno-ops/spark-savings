@@ -90,10 +90,10 @@ export default function LandingPage() {
             <div className="mt-9 flex items-center gap-5">
               <div className="flex shrink-0 flex-col rounded-2xl bg-emerald-50 px-5 py-4 leading-none">
                 <span className="text-3xl font-bold tracking-tight text-emerald-700">
-                  €48M+
+                  85%
                 </span>
                 <span className="mt-2 text-xs font-semibold text-emerald-600">
-                  Saved for companies
+                  You keep
                 </span>
               </div>
               <div className="min-w-0">
@@ -101,7 +101,8 @@ export default function LandingPage() {
                   Real money, real fast
                 </p>
                 <p className="mt-0.5 text-sm leading-relaxed text-slate-500">
-                  Contributors keep 85% of every unlocked playbook.
+                  Set your own price — we take a flat 15%. Get paid when a
+                  company unlocks your playbook.
                 </p>
                 <Link
                   href="/how-it-works"
@@ -194,24 +195,6 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* trusted-by logos */}
-        <div className="mx-auto mt-16 flex max-w-6xl flex-wrap items-center gap-9 border-t border-slate-100 pt-8">
-          <span className="whitespace-nowrap text-[13px] font-semibold text-slate-400">
-            Trusted by lean teams at
-          </span>
-          <div className="flex flex-1 flex-wrap justify-between gap-x-10 gap-y-4">
-            {["Northwind", "Atlas", "Brightwave", "Cedar&Co", "Lumen", "Pulse"].map(
-              (l) => (
-                <span
-                  key={l}
-                  className="text-xl font-bold tracking-tight text-slate-300 hover:text-slate-400"
-                >
-                  {l}
-                </span>
-              )
-            )}
-          </div>
-        </div>
       </section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────── */}
