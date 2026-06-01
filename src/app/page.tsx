@@ -16,6 +16,7 @@ import {
   Users,
   TrendingDown,
   Bell,
+  SlidersHorizontal,
   Cloud,
   Truck,
   Wallet,
@@ -121,45 +122,51 @@ export default function LandingPage() {
               className="absolute inset-y-[6%] left-[8%] right-[-4%] bg-emerald-500/95"
               style={{ borderRadius: "46% 54% 58% 42% / 54% 44% 56% 46%" }}
             />
-            {/* photo placeholder */}
-            <div className="absolute inset-y-[15%] left-[18%] right-[6%] z-10 overflow-hidden rounded-3xl bg-slate-900 shadow-2xl">
-              <div
-                className="absolute inset-0 opacity-[0.06]"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-                  backgroundSize: "26px 26px",
-                }}
-              />
-              <div className="flex h-full items-center justify-center">
-                <span className="rounded-md border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] text-slate-400">
-                  contributor at work
+            {/* sample opportunity card — mirrors the real marketplace card */}
+            <div className="absolute inset-y-[14%] left-[20%] right-[8%] z-10 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+              <div className="flex items-center justify-between">
+                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium capitalize text-slate-500">
+                  technology
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
+                  <SlidersHorizontal className="h-3 w-3" />
+                  91/100
+                </span>
+              </div>
+
+              <h3 className="mt-4 text-lg font-semibold leading-snug text-slate-900">
+                Ditch Zendesk and save 50–70%
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                Switch to Freshdesk without losing features — full migration
+                playbook for support teams of 10–80 agents.
+              </p>
+
+              <div className="mt-3 flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                ))}
+                <span className="ml-1 text-xs text-slate-400">4.9 (27)</span>
+              </div>
+
+              <div className="mt-auto flex items-end justify-between border-t border-slate-100 pt-4">
+                <div>
+                  <p className="text-[11px] font-medium uppercase tracking-wide text-slate-400">
+                    Est. savings
+                  </p>
+                  <p className="text-sm font-semibold text-slate-900">
+                    €15k–€60k / yr
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white">
+                  Unlock €250
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </div>
             </div>
 
-            {/* floating: submit-an-idea mini card */}
-            <div className="absolute right-[-2%] top-[4%] z-20 w-52 rounded-2xl border border-slate-200 bg-white p-3.5 shadow-xl">
-              <p className="text-xs font-semibold text-slate-500">
-                Category
-              </p>
-              <div className="mt-1 mb-2 rounded-lg border border-slate-200 px-3 py-2 text-[13px] font-semibold text-slate-600">
-                Cloud &amp; Infrastructure
-              </div>
-              <p className="text-xs font-semibold text-slate-500">Stage 1 price</p>
-              <div className="mt-1 mb-3 rounded-lg border border-slate-200 px-3 py-2 text-[13px] font-semibold text-slate-600">
-                €250 – €500
-              </div>
-              <Link
-                href="/contributor/new"
-                className="block rounded-full bg-emerald-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-emerald-400"
-              >
-                Submit an idea
-              </Link>
-            </div>
-
-            {/* floating: alert pill */}
-            <div className="absolute left-[-6%] top-[40%] z-20 flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
+            {/* floating: alert pill — clips the card's upper-left edge */}
+            <div className="absolute left-[-9%] top-[22%] z-20 flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
               <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-50 text-emerald-700">
                 <Bell className="w-3.5 h-3.5" />
               </span>
@@ -168,8 +175,8 @@ export default function LandingPage() {
               </span>
             </div>
 
-            {/* floating: contributors */}
-            <div className="absolute bottom-[4%] left-[2%] z-20 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
+            {/* floating: contributors — sits at the lower-left corner */}
+            <div className="absolute bottom-[-6%] left-[-7%] z-20 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
               <div className="flex">
                 {["bg-violet-500", "bg-emerald-500", "bg-orange-500", "bg-pink-500"].map(
                   (c, i) => (
