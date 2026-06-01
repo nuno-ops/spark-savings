@@ -8,9 +8,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-1.5 text-base font-bold text-slate-900">
-              <Zap className="w-4 h-4 text-emerald-500" />
-              Spark Deal
+            <Link href="/" className="flex items-center gap-2 text-base font-bold text-slate-900">
+              <span className="grid h-6 w-6 place-items-center rounded-md bg-emerald-500 text-white">
+                <Zap className="w-3.5 h-3.5" />
+              </span>
+              Spark<span className="text-emerald-500">Deal</span>
             </Link>
             <p className="text-sm text-slate-500 mt-2 leading-relaxed">
               The marketplace for cost-saving strategies. Submit ideas, unlock savings.

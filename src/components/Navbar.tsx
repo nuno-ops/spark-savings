@@ -41,9 +41,11 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/60">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 sm:px-6 h-14">
-        <Link href="/" className="flex items-center gap-1.5 text-lg font-bold tracking-tight text-slate-900">
-          <Zap className="w-5 h-5 text-emerald-500" />
-          Spark Deal
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-slate-900">
+          <span className="grid h-7 w-7 place-items-center rounded-lg bg-emerald-500 text-white">
+            <Zap className="w-4 h-4" />
+          </span>
+          Spark<span className="text-emerald-500">Deal</span>
         </Link>
 
         {/* Desktop nav */}
