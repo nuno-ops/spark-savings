@@ -175,28 +175,14 @@ export default function LandingPage() {
               </span>
             </div>
 
-            {/* floating: contributors — sits at the lower-left corner */}
+            {/* floating: trust badge — sits at the lower-left corner */}
             <div className="absolute bottom-[-6%] left-[-7%] z-20 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
-              <div className="flex">
-                {["bg-violet-500", "bg-emerald-500", "bg-orange-500", "bg-pink-500"].map(
-                  (c, i) => (
-                    <span
-                      key={i}
-                      className={`grid h-8 w-8 place-items-center rounded-full border-2 border-white text-xs font-bold text-white ${c} ${
-                        i > 0 ? "-ml-2.5" : ""
-                      }`}
-                    >
-                      {["M", "D", "A", "P"][i]}
-                    </span>
-                  )
-                )}
-                <span className="-ml-2.5 grid h-8 w-8 place-items-center rounded-full border-2 border-white bg-slate-900 text-white">
-                  <Zap className="w-3.5 h-3.5" />
-                </span>
-              </div>
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-50 text-emerald-700">
+                <Shield className="h-5 w-5" />
+              </span>
               <div>
-                <p className="text-sm font-bold text-slate-900">5.2k+ contributors</p>
-                <p className="text-[13px] text-slate-500">sharing playbooks</p>
+                <p className="text-sm font-bold text-slate-900">Verified savings</p>
+                <p className="text-[13px] text-slate-500">Reviewed before it earns</p>
               </div>
             </div>
           </div>
