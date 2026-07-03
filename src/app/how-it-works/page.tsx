@@ -8,7 +8,7 @@ export default function HowItWorksPage() {
       </p>
 
       {/* Overview */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 mb-8">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-8">
         <h2 className="text-lg font-semibold text-slate-900 mb-4">
           The Marketplace at a Glance
         </h2>
@@ -46,7 +46,7 @@ export default function HowItWorksPage() {
       {/* Two-column: Contributors & Companies */}
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Contributors */}
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <span className="bg-emerald-100 text-emerald-700 text-xs font-medium px-2 py-1 rounded">
               Contributor
@@ -114,7 +114,7 @@ export default function HowItWorksPage() {
         </div>
 
         {/* Companies */}
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="flex items-center gap-2 mb-4">
             <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded">
               Company
@@ -185,7 +185,7 @@ export default function HowItWorksPage() {
       </div>
 
       {/* Pricing & Policies */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 mb-8">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-8">
         <h2 className="text-lg font-semibold text-slate-900 mb-4">
           Pricing &amp; Policies
         </h2>
@@ -230,7 +230,7 @@ export default function HowItWorksPage() {
         <p className="text-slate-600 mb-4">Ready to get started?</p>
         <a
           href="/auth/signup"
-          className="inline-block bg-slate-900 text-white px-6 py-3 rounded-lg hover:bg-slate-800 font-medium"
+          className="inline-block rounded-full bg-emerald-500 px-7 py-3 font-semibold text-white transition hover:bg-emerald-600"
         >
           Create Your Account
         </a>

@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 text-base font-bold text-slate-900">
-              <span className="grid h-6 w-6 place-items-center rounded-md bg-emerald-500 text-white">
+              <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-500 text-white">
                 <Zap className="w-3.5 h-3.5" />
               </span>
               Spark<span className="text-emerald-500">Deal</span>

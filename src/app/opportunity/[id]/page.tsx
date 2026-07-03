@@ -1,10 +1,12 @@
 "use client";
 
+import { categoryLabel } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Star, Lock, Unlock, TrendingUp, MessageCircle, AlertTriangle, ChevronRight } from "lucide-react";
+import { ArrowLeft, Lock, Unlock, TrendingUp, MessageCircle, AlertTriangle, ChevronRight } from "lucide-react";
+import { Stars } from "@/components/ui";
 
 interface ReviewItem {
   id: string;
@@ -39,21 +41,6 @@ interface OpportunityDetail {
   fullPlaybook?: string;
   templates?: string;
   watermark2?: string;
-}
-
-function StarDisplay({ rating }: { rating: number }) {
-  return (
-    <span className="inline-flex gap-0.5">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${
-            i <= Math.round(rating) ? "text-amber-400 fill-amber-400" : "text-slate-200"
-          }`}
-        />
-      ))}
-    </span>
-  );
 }
 
 export default function OpportunityDetailPage() {
@@ -100,7 +87,7 @@ export default function OpportunityDetailPage() {
     return (
       <div className="max-w-3xl mx-auto animate-pulse">
         <div className="h-4 bg-slate-100 rounded w-32 mb-4" />
-        <div className="bg-white rounded-lg border border-slate-200 p-8">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8">
           <div className="h-6 bg-slate-100 rounded w-3/4 mb-3" />
           <div className="h-4 bg-slate-100 rounded w-full mb-2" />
           <div className="h-4 bg-slate-100 rounded w-2/3" />
@@ -119,10 +106,10 @@ export default function OpportunityDetailPage() {
         Back to marketplace
       </Link>
 
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-8">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded capitalize">
-            {opp.category}
+            {categoryLabel(opp.category)}
           </span>
           <span className="text-xs text-slate-400 font-medium">
             Score: {Math.round(opp.confidenceScore)}/100
@@ -133,7 +120,7 @@ export default function OpportunityDetailPage() {
 
         {opp.reviewCount > 0 && (
           <div className="flex items-center gap-2 mb-3">
-            <StarDisplay rating={opp.avgRating} />
+            <Stars rating={opp.avgRating} />
             <span className="text-sm text-slate-500">
               {opp.avgRating.toFixed(1)} ({opp.reviewCount}{" "}
               {opp.reviewCount === 1 ? "review" : "reviews"})
@@ -158,7 +145,7 @@ export default function OpportunityDetailPage() {
         </div>
 
         {opp.savingsEstimateLow > 0 && (
-          <div className="flex items-center gap-2.5 bg-emerald-50 border border-emerald-100 rounded-md p-4 mb-6 text-sm text-emerald-700">
+          <div className="flex items-center gap-2.5 bg-emerald-50 border border-emerald-100 rounded-lg p-4 mb-6 text-sm text-emerald-700">
             <TrendingUp className="w-4 h-4 shrink-0" />
             Estimated savings: &euro;{opp.savingsEstimateLow.toLocaleString()} — &euro;{opp.savingsEstimateHigh.toLocaleString()}
           </div>
@@ -178,7 +165,7 @@ export default function OpportunityDetailPage() {
           {opp.hasStage1 || opp.validationChecklist ? (
             <div className="space-y-4">
               {opp.watermark && (
-                <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs px-3 py-2 rounded-md">
+                <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs px-3 py-2 rounded-lg">
                   <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                   {opp.watermark}
                 </div>
@@ -186,7 +173,7 @@ export default function OpportunityDetailPage() {
               {opp.validationChecklist && (
                 <div>
                   <h3 className="font-medium text-slate-700 text-sm mb-1.5">Validation Checklist</h3>
-                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-md leading-relaxed">
+                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-lg leading-relaxed">
                     {opp.validationChecklist}
                   </div>
                 </div>
@@ -194,7 +181,7 @@ export default function OpportunityDetailPage() {
               {opp.requirements && (
                 <div>
                   <h3 className="font-medium text-slate-700 text-sm mb-1.5">Requirements</h3>
-                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-md leading-relaxed">
+                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-lg leading-relaxed">
                     {opp.requirements}
                   </div>
                 </div>
@@ -202,14 +189,14 @@ export default function OpportunityDetailPage() {
               {opp.highLevelApproach && (
                 <div>
                   <h3 className="font-medium text-slate-700 text-sm mb-1.5">High-Level Approach</h3>
-                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-md leading-relaxed">
+                  <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-lg leading-relaxed">
                     {opp.highLevelApproach}
                   </div>
                 </div>
               )}
             </div>
           ) : (
-            <div className="bg-slate-50 border border-dashed border-slate-200 rounded-md p-8 text-center">
+            <div className="bg-slate-50 border border-dashed border-slate-200 rounded-lg p-8 text-center">
               <Lock className="w-6 h-6 text-slate-300 mx-auto mb-3" />
               <p className="text-slate-500 text-sm mb-4">
                 This content is sealed. Purchase Stage 1 to unlock the validation checklist, requirements, and high-level approach.
@@ -218,7 +205,7 @@ export default function OpportunityDetailPage() {
                 <button
                   onClick={() => handlePurchase(1)}
                   disabled={purchasing}
-                  className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-md hover:bg-slate-800 disabled:opacity-50 text-sm font-medium"
+                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
                 >
                   {purchasing ? "Processing..." : `Unlock Stage 1 — \u20AC${opp.stage1Price}`}
                   <ChevronRight className="w-4 h-4" />
@@ -251,7 +238,7 @@ export default function OpportunityDetailPage() {
             {opp.hasStage2 || opp.fullPlaybook ? (
               <div className="space-y-4">
                 {opp.watermark2 && (
-                  <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs px-3 py-2 rounded-md">
+                  <div className="flex items-center gap-2 bg-amber-50 border border-amber-100 text-amber-700 text-xs px-3 py-2 rounded-lg">
                     <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                     {opp.watermark2}
                   </div>
@@ -259,7 +246,7 @@ export default function OpportunityDetailPage() {
                 {opp.fullPlaybook && (
                   <div>
                     <h3 className="font-medium text-slate-700 text-sm mb-1.5">Full Playbook</h3>
-                    <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-md leading-relaxed">
+                    <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-lg leading-relaxed">
                       {opp.fullPlaybook}
                     </div>
                   </div>
@@ -267,21 +254,21 @@ export default function OpportunityDetailPage() {
                 {opp.templates && (
                   <div>
                     <h3 className="font-medium text-slate-700 text-sm mb-1.5">Templates</h3>
-                    <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-md leading-relaxed">
+                    <div className="text-slate-600 text-sm whitespace-pre-wrap bg-slate-50 p-4 rounded-lg leading-relaxed">
                       {opp.templates}
                     </div>
                   </div>
                 )}
                 <Link
                   href={`/company/${opp.id}`}
-                  className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-md text-sm hover:bg-slate-800 font-medium"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
                 >
                   <MessageCircle className="w-4 h-4" />
                   Messages &amp; Meeting
                 </Link>
               </div>
             ) : (
-              <div className="bg-slate-50 border border-dashed border-slate-200 rounded-md p-8 text-center">
+              <div className="bg-slate-50 border border-dashed border-slate-200 rounded-lg p-8 text-center">
                 <Lock className="w-6 h-6 text-slate-300 mx-auto mb-3" />
                 <p className="text-slate-500 text-sm mb-4">
                   Get the full step-by-step playbook, templates, and request a meeting with the contributor.
@@ -290,7 +277,7 @@ export default function OpportunityDetailPage() {
                   <button
                     onClick={() => handlePurchase(2)}
                     disabled={purchasing}
-                    className="inline-flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-md hover:bg-emerald-500 disabled:opacity-50 text-sm font-medium"
+                    className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
                   >
                     {purchasing ? "Processing..." : `Unlock Stage 2 — \u20AC${opp.stage2Price}`}
                     <ChevronRight className="w-4 h-4" />
@@ -316,13 +303,13 @@ export default function OpportunityDetailPage() {
           {opp.reviews && opp.reviews.length > 0 ? (
             <div className="space-y-3">
               {opp.reviews.map((review) => (
-                <div key={review.id} className="bg-slate-50 rounded-md p-4">
+                <div key={review.id} className="bg-slate-50 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <div className="w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-medium">
                         {review.company.name.charAt(0)}
                       </div>
-                      <StarDisplay rating={review.rating} />
+                      <Stars rating={review.rating} />
                       <span className="text-sm font-medium text-slate-700">{review.company.name}</span>
                     </div>
                     <span className="text-xs text-slate-400">

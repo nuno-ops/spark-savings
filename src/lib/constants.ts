@@ -18,6 +18,27 @@ export const CATEGORIES = [
   "compliance",
 ] as const;
 
+// Display labels — CSS `capitalize` renders "hr" as "Hr", so map explicitly.
+export const CATEGORY_LABELS: Record<(typeof CATEGORIES)[number], string> = {
+  general: "General",
+  energy: "Energy",
+  procurement: "Procurement",
+  logistics: "Logistics",
+  technology: "Technology",
+  operations: "Operations",
+  finance: "Finance",
+  hr: "HR",
+  marketing: "Marketing",
+  compliance: "Compliance",
+};
+
+export function categoryLabel(cat: string): string {
+  return (
+    CATEGORY_LABELS[cat as (typeof CATEGORIES)[number]] ??
+    cat.charAt(0).toUpperCase() + cat.slice(1)
+  );
+}
+
 export const REFUND_WINDOW_HOURS = 48;
 
 export const REQUEST_STATUSES = ["open", "closed", "suspended"] as const;

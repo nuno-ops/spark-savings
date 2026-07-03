@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CATEGORIES } from "@/lib/constants";
+import { CATEGORIES, categoryLabel } from "@/lib/constants";
 import {
   Lightbulb,
   Search,
@@ -70,7 +70,7 @@ export default function LandingPage() {
             <form
               action="/marketplace"
               method="get"
-              className="mt-7 flex max-w-lg items-center gap-2 rounded-full border border-slate-200 bg-white p-2 pl-5 shadow-sm focus-within:ring-2 focus-within:ring-slate-900"
+              className="mt-7 flex max-w-lg items-center gap-2 rounded-full border border-slate-200 bg-white p-2 pl-5 shadow-sm focus-within:ring-2 focus-within:ring-emerald-500"
             >
               <Search className="w-4.5 h-4.5 shrink-0 text-slate-400" />
               <input
@@ -81,7 +81,7 @@ export default function LandingPage() {
               />
               <button
                 type="submit"
-                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-400"
+                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600"
               >
                 Search
               </button>
@@ -125,8 +125,8 @@ export default function LandingPage() {
             {/* sample opportunity card — mirrors the real marketplace card */}
             <div className="absolute inset-y-[14%] left-[20%] right-[8%] z-10 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
               <div className="flex items-center justify-between">
-                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium capitalize text-slate-500">
-                  technology
+                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500">
+                  Technology
                 </span>
                 <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
                   <SlidersHorizontal className="h-3 w-3" />
@@ -318,7 +318,7 @@ export default function LandingPage() {
               </ul>
               <Link
                 href="/auth/signup"
-                className="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-slate-800"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
               >
                 Start Contributing
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -381,7 +381,7 @@ export default function LandingPage() {
               </ul>
               <Link
                 href="/marketplace"
-                className="mt-6 inline-flex items-center gap-2 rounded-md bg-emerald-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-600"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
               >
                 Browse Opportunities
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -423,8 +423,8 @@ export default function LandingPage() {
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-500 group-hover:text-white">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <span className="flex-1 font-semibold capitalize text-slate-900">
-                    {cat}
+                  <span className="flex-1 font-semibold text-slate-900">
+                    {categoryLabel(cat)}
                   </span>
                   <ArrowUpRight className="h-4.5 w-4.5 text-slate-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-emerald-500" />
                 </Link>

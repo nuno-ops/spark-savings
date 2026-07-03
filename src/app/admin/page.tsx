@@ -1,5 +1,6 @@
 "use client";
 
+import { categoryLabel } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -233,7 +234,7 @@ export default function AdminPage() {
               { label: "Flagged Items", value: String(stats.flaggedCount), icon: AlertTriangle },
               { label: "Suspended Users", value: String(stats.suspendedUsers), icon: Ban },
             ].map((card, i) => (
-              <div key={i} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+              <div key={i} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <card.icon className="w-4 h-4 text-slate-400" />
                   <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">{card.label}</p>
@@ -242,7 +243,7 @@ export default function AdminPage() {
               </div>
             ))}
           </div>
-          <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
             <h3 className="text-sm font-semibold text-slate-900 mb-3">Users by Role</h3>
             <div className="flex gap-8">
               {Object.entries(stats.usersByRole).map(([role, count]) => (
@@ -262,16 +263,16 @@ export default function AdminPage() {
           <div className="flex flex-wrap gap-2 mb-4">
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input type="text" value={oppSearch} onChange={(e) => setOppSearch(e.target.value)} placeholder="Search..." className="w-full border border-slate-200 rounded-md pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400" />
+              <input type="text" value={oppSearch} onChange={(e) => setOppSearch(e.target.value)} placeholder="Search..." className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400" />
             </div>
-            <select value={oppStatusFilter} onChange={(e) => setOppStatusFilter(e.target.value)} className="border border-slate-200 rounded-md px-3 py-2 text-sm bg-white">
+            <select value={oppStatusFilter} onChange={(e) => setOppStatusFilter(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white">
               <option value="all">All Statuses</option>
               <option value="draft">Draft</option>
               <option value="published">Published</option>
               <option value="flagged">Flagged</option>
               <option value="suspended">Suspended</option>
             </select>
-            <select value={oppSort} onChange={(e) => setOppSort(e.target.value)} className="border border-slate-200 rounded-md px-3 py-2 text-sm bg-white">
+            <select value={oppSort} onChange={(e) => setOppSort(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white">
               <option value="createdAt-desc">Newest First</option>
               <option value="createdAt-asc">Oldest First</option>
               <option value="confidenceScore-desc">Highest Score</option>
@@ -286,14 +287,14 @@ export default function AdminPage() {
           ) : (
             <div className="space-y-3">
               {opportunities.map((opp) => (
-                <div key={opp.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+                <div key={opp.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-slate-900 text-sm">{opp.title}</h3>
                       <p className="text-sm text-slate-500 mt-0.5 line-clamp-1">{opp.brief}</p>
                       <div className="flex flex-wrap gap-2.5 mt-2 text-xs text-slate-400">
                         <span>by {opp.contributor.name}</span>
-                        <span className="capitalize">{opp.category}</span>
+                        <span className="capitalize">{categoryLabel(opp.category)}</span>
                         <span>{opp._count.purchases} purchases</span>
                         <span>{new Date(opp.createdAt).toLocaleDateString()}</span>
                       </div>
@@ -311,12 +312,12 @@ export default function AdminPage() {
                     </div>
                   )}
                   <div className="mt-3 flex gap-2">
-                    {opp.status === "draft" && <button onClick={() => publishOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Publish</button>}
-                    {opp.status === "flagged" && <button onClick={() => approveOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve</button>}
+                    {opp.status === "draft" && <button onClick={() => publishOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Publish</button>}
+                    {opp.status === "flagged" && <button onClick={() => approveOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve</button>}
                     {opp.status !== "suspended" ? (
-                      <button onClick={() => suspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
+                      <button onClick={() => suspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
                     ) : (
-                      <button onClick={() => unsuspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-slate-500 font-medium">Unsuspend</button>
+                      <button onClick={() => unsuspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-slate-500 font-medium">Unsuspend</button>
                     )}
                   </div>
                 </div>
@@ -332,15 +333,15 @@ export default function AdminPage() {
           <div className="flex flex-wrap gap-2 mb-4">
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input type="text" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} placeholder="Search..." className="w-full border border-slate-200 rounded-md pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400" />
+              <input type="text" value={userSearch} onChange={(e) => setUserSearch(e.target.value)} placeholder="Search..." className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400" />
             </div>
-            <select value={userRoleFilter} onChange={(e) => setUserRoleFilter(e.target.value)} className="border border-slate-200 rounded-md px-3 py-2 text-sm bg-white">
+            <select value={userRoleFilter} onChange={(e) => setUserRoleFilter(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white">
               <option value="all">All Roles</option>
               <option value="contributor">Contributor</option>
               <option value="company">Company</option>
               <option value="admin">Admin</option>
             </select>
-            <select value={userSuspendedFilter} onChange={(e) => setUserSuspendedFilter(e.target.value)} className="border border-slate-200 rounded-md px-3 py-2 text-sm bg-white">
+            <select value={userSuspendedFilter} onChange={(e) => setUserSuspendedFilter(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white">
               <option value="">All Users</option>
               <option value="true">Suspended Only</option>
               <option value="false">Active Only</option>
@@ -353,7 +354,7 @@ export default function AdminPage() {
           ) : (
             <div className="space-y-2">
               {users.map((user) => (
-                <div key={user.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex items-center justify-between">
+                <div key={user.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2">
                       <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-medium">
@@ -372,7 +373,7 @@ export default function AdminPage() {
                   </div>
                   {user.id !== session?.user?.id && (
                     <button onClick={() => toggleUserSuspension(user.id, user.suspended)}
-                      className={`px-3 py-1.5 rounded-md text-xs font-medium ${user.suspended ? "bg-emerald-600 text-white hover:bg-emerald-500" : "bg-red-600 text-white hover:bg-red-500"}`}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium ${user.suspended ? "bg-emerald-600 text-white hover:bg-emerald-500" : "bg-red-600 text-white hover:bg-red-500"}`}
                     >{user.suspended ? "Unsuspend" : "Suspend"}</button>
                   )}
                 </div>
@@ -391,12 +392,12 @@ export default function AdminPage() {
               <p className="text-slate-500">No flagged submissions. All clear.</p>
             </div>
           ) : flagged.map((opp) => (
-            <div key={opp.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+            <div key={opp.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
               <h3 className="font-semibold text-slate-900 text-sm">{opp.title}</h3>
               <p className="text-sm text-slate-500 mt-0.5">{opp.brief}</p>
               <p className="text-xs text-slate-400 mt-1.5">by {opp.contributor.name} ({opp.contributor.email})</p>
 
-              <div className="mt-3 bg-slate-50 border border-slate-200 rounded-md p-4">
+              <div className="mt-3 bg-slate-50 border border-slate-200 rounded-lg p-4">
                 <p className="text-xs font-medium text-slate-700 mb-2">Triage Breakdown</p>
                 <div className="mb-3">
                   <div className="flex justify-between text-xs mb-1">
@@ -432,8 +433,8 @@ export default function AdminPage() {
                 )}
               </div>
               <div className="mt-3 flex gap-2">
-                <button onClick={() => approveOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve &amp; Publish</button>
-                <button onClick={() => suspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
+                <button onClick={() => approveOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve &amp; Publish</button>
+                <button onClick={() => suspendOpportunity(opp.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
               </div>
             </div>
           ))}
@@ -444,7 +445,7 @@ export default function AdminPage() {
       {tab === "refunds" && (
         <div>
           {refunds.length > 0 && (
-            <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-100 rounded-md p-4 mb-4 text-sm text-amber-700">
+            <div className="flex items-center gap-2.5 bg-amber-50 border border-amber-100 rounded-lg p-4 mb-4 text-sm text-amber-700">
               <Clock className="w-4 h-4 shrink-0" />
               <span><strong>{refunds.length} pending refund{refunds.length !== 1 ? "s" : ""}</strong> totalling &euro;{refunds.reduce((sum, r) => sum + r.amountEuros, 0).toLocaleString()}</span>
             </div>
@@ -456,13 +457,13 @@ export default function AdminPage() {
                 <p className="text-slate-500">No pending refund requests.</p>
               </div>
             ) : refunds.map((r) => (
-              <div key={r.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+              <div key={r.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                 <h3 className="font-semibold text-slate-900 text-sm">{r.opportunity.title}</h3>
                 <p className="text-sm text-slate-500 mt-0.5">Stage {r.stage} &mdash; &euro;{r.amountEuros}</p>
                 <p className="text-xs text-slate-400 mt-1">Requested by {r.company.name} ({r.company.email}) on {new Date(r.refundRequestedAt).toLocaleString()}</p>
                 <div className="mt-3 flex gap-2">
-                  <button onClick={() => handleRefund(r.id, "approve")} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve Refund</button>
-                  <button onClick={() => handleRefund(r.id, "deny")} className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-slate-500 font-medium"><XCircle className="w-3.5 h-3.5" />Deny</button>
+                  <button onClick={() => handleRefund(r.id, "approve")} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Approve Refund</button>
+                  <button onClick={() => handleRefund(r.id, "deny")} className="inline-flex items-center gap-1.5 bg-slate-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-slate-500 font-medium"><XCircle className="w-3.5 h-3.5" />Deny</button>
                 </div>
               </div>
             ))}
@@ -476,9 +477,9 @@ export default function AdminPage() {
           <div className="flex flex-wrap gap-2 mb-4">
             <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-              <input type="text" value={reqSearch} onChange={(e) => setReqSearch(e.target.value)} placeholder="Search requests..." className="w-full border border-slate-200 rounded-md pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400" />
+              <input type="text" value={reqSearch} onChange={(e) => setReqSearch(e.target.value)} placeholder="Search requests..." className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400" />
             </div>
-            <select value={reqStatusFilter} onChange={(e) => setReqStatusFilter(e.target.value)} className="border border-slate-200 rounded-md px-3 py-2 text-sm bg-white">
+            <select value={reqStatusFilter} onChange={(e) => setReqStatusFilter(e.target.value)} className="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white">
               <option value="all">All Statuses</option>
               <option value="open">Open</option>
               <option value="closed">Closed</option>
@@ -495,7 +496,7 @@ export default function AdminPage() {
           ) : (
             <div className="space-y-3">
               {adminRequests.map((req) => (
-                <div key={req.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+                <div key={req.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-slate-900 text-sm">{req.title}</h3>
@@ -507,7 +508,7 @@ export default function AdminPage() {
                         </span>
                         <span className="inline-flex items-center gap-1">
                           <Tag className="w-3 h-3" />
-                          <span className="capitalize">{req.category}</span>
+                          <span className="capitalize">{categoryLabel(req.category)}</span>
                         </span>
                         <span className="inline-flex items-center gap-1">
                           <Target className="w-3 h-3" />
@@ -532,9 +533,9 @@ export default function AdminPage() {
                   </div>
                   <div className="mt-3 flex gap-2">
                     {req.status !== "suspended" ? (
-                      <button onClick={() => suspendRequest(req.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
+                      <button onClick={() => suspendRequest(req.id)} className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-red-500 font-medium"><Ban className="w-3.5 h-3.5" />Suspend</button>
                     ) : (
-                      <button onClick={() => unsuspendRequest(req.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Unsuspend</button>
+                      <button onClick={() => unsuspendRequest(req.id)} className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium"><CheckCircle2 className="w-3.5 h-3.5" />Unsuspend</button>
                     )}
                   </div>
                 </div>
