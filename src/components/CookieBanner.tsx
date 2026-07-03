@@ -45,13 +45,13 @@ export default function CookieBanner() {
         <div className="flex gap-2 shrink-0">
           <button
             onClick={handleDecline}
-            className="px-4 py-2 text-sm text-slate-600 border border-slate-200 rounded-md hover:bg-slate-50 font-medium"
+            className="px-4 py-2 text-sm text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 font-medium"
           >
             Essential Only
           </button>
           <button
             onClick={handleAccept}
-            className="px-4 py-2 text-sm text-white bg-slate-900 rounded-md hover:bg-slate-800 font-medium"
+            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
           >
             Accept All
           </button>

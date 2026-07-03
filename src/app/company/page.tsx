@@ -1,5 +1,6 @@
 "use client";
 
+import { categoryLabel } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -153,7 +154,7 @@ export default function CompanyDashboard() {
         </div>
         <Link
           href="/company/new-request"
-          className="inline-flex items-center gap-1.5 bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800"
+          className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
         >
           <Plus className="w-4 h-4" />
           New Request
@@ -161,7 +162,7 @@ export default function CompanyDashboard() {
       </div>
 
       {/* Stat card */}
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5 mb-6 flex items-center gap-4">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-6 flex items-center gap-4">
         <div className="w-10 h-10 rounded-lg bg-slate-900 text-white flex items-center justify-center">
           <DollarSign className="w-5 h-5" />
         </div>
@@ -172,7 +173,7 @@ export default function CompanyDashboard() {
       </div>
 
       {/* Company Profile */}
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5 mb-6">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 mb-6">
         <div className="flex items-center gap-2 mb-3">
           <Building2 className="w-4 h-4 text-slate-500" />
           <h2 className="text-sm font-semibold text-slate-900">Company Profile</h2>
@@ -185,13 +186,13 @@ export default function CompanyDashboard() {
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="e.g. Acme Corporation"
-              className="w-full border border-slate-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
             />
           </div>
           <button
             onClick={saveCompanyName}
             disabled={savingProfile || companyName.trim() === savedCompanyName}
-            className="inline-flex items-center gap-1.5 bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800 disabled:opacity-40"
+            className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-40"
           >
             {savingProfile ? "Saving..." : "Save"}
           </button>
@@ -246,7 +247,7 @@ export default function CompanyDashboard() {
               {purchases.map((p) => {
                 const sl = statusLabel(p.status);
                 return (
-                  <div key={p.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex items-center justify-between">
+                  <div key={p.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex items-center justify-between">
                     <div className="min-w-0 flex-1">
                       <Link href={`/company/${p.opportunity.id}`} className="font-medium text-slate-900 hover:text-slate-600 text-sm">
                         {p.opportunity.title}
@@ -262,13 +263,13 @@ export default function CompanyDashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 ml-4">
-                      <Link href={`/company/${p.opportunity.id}`} className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md" title="View">
+                      <Link href={`/company/${p.opportunity.id}`} className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="View">
                         <ExternalLink className="w-4 h-4" />
                       </Link>
                       {p.status === "completed" && (
                         <button
                           onClick={() => requestRefund(p.id)}
-                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md"
+                          className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
                           title="Request Refund"
                         >
                           <RotateCcw className="w-4 h-4" />
@@ -300,7 +301,7 @@ export default function CompanyDashboard() {
             <div className="space-y-3">
               {requests.map((req) => (
                 <Link key={req.id} href={`/requests/${req.id}`} className="block">
-                  <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5 hover:border-slate-300 transition-colors">
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-slate-300 transition-colors">
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-slate-900 text-sm">{req.title}</h3>
@@ -313,7 +314,7 @@ export default function CompanyDashboard() {
                     <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-slate-400">
                       <span className="inline-flex items-center gap-1">
                         <Tag className="w-3 h-3" />
-                        <span className="capitalize">{req.category}</span>
+                        <span className="capitalize">{categoryLabel(req.category)}</span>
                       </span>
                       <span className="inline-flex items-center gap-1">
                         <DollarSign className="w-3 h-3" />

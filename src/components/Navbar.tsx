@@ -2,39 +2,42 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { LogOut, LayoutDashboard, ShieldCheck, Store, Info, Zap, Target, Menu, X } from "lucide-react";
 
+const NAV_LINKS = [
+  { href: "/marketplace", label: "Marketplace", icon: Store },
+  { href: "/requests", label: "Requests", icon: Target },
+  { href: "/how-it-works", label: "How It Works", icon: Info },
+];
+
 export default function Navbar() {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = (
     <>
-      <Link
-        href="/marketplace"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
-        onClick={() => setMobileOpen(false)}
-      >
-        <Store className="w-3.5 h-3.5" />
-        Marketplace
-      </Link>
-      <Link
-        href="/requests"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
-        onClick={() => setMobileOpen(false)}
-      >
-        <Target className="w-3.5 h-3.5" />
-        Requests
-      </Link>
-      <Link
-        href="/how-it-works"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
-        onClick={() => setMobileOpen(false)}
-      >
-        <Info className="w-3.5 h-3.5" />
-        How It Works
-      </Link>
+      {NAV_LINKS.map(({ href, label, icon: Icon }) => {
+        const active = pathname === href || pathname?.startsWith(`${href}/`);
+        return (
+          <Link
+            key={href}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg ${
+              active
+                ? "text-emerald-700 bg-emerald-50 font-medium"
+                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+            }`}
+            onClick={() => setMobileOpen(false)}
+          >
+            <Icon className="w-3.5 h-3.5" />
+            {label}
+          </Link>
+        );
+      })}
     </>
   );
 
@@ -56,13 +59,13 @@ export default function Navbar() {
             <>
               <Link
                 href="/auth/signin"
-                className="px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
+                className="px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
               >
                 Sign In
               </Link>
               <Link
                 href="/auth/signup"
-                className="ml-1 bg-slate-900 text-white px-4 py-1.5 rounded-md text-sm font-medium hover:bg-slate-800"
+                className="ml-1 rounded-full bg-emerald-500 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
               >
                 Sign Up
               </Link>
@@ -72,7 +75,7 @@ export default function Navbar() {
               {session.user.role === "contributor" && (
                 <Link
                   href="/contributor"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   Dashboard
@@ -81,7 +84,7 @@ export default function Navbar() {
               {session.user.role === "company" && (
                 <Link
                   href="/company"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   Dashboard
@@ -90,7 +93,7 @@ export default function Navbar() {
               {session.user.role === "admin" && (
                 <Link
                   href="/admin"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
                   Admin
@@ -111,7 +114,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="ml-2 p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md"
+                className="ml-2 p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
                 title="Sign Out"
               >
                 <LogOut className="w-4 h-4" />
@@ -122,7 +125,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="sm:hidden p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md"
+          className="sm:hidden p-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -139,14 +142,14 @@ export default function Navbar() {
             <div className="pt-2 border-t border-slate-100 mt-2 space-y-1">
               <Link
                 href="/auth/signin"
-                className="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100"
+                className="block px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign In
               </Link>
               <Link
                 href="/auth/signup"
-                className="block text-center bg-slate-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-slate-800"
+                className="block text-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign Up
@@ -157,7 +160,7 @@ export default function Navbar() {
               {session.user.role === "contributor" && (
                 <Link
                   href="/contributor"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100 w-full"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 w-full"
                   onClick={() => setMobileOpen(false)}
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
@@ -167,7 +170,7 @@ export default function Navbar() {
               {session.user.role === "company" && (
                 <Link
                   href="/company"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100 w-full"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 w-full"
                   onClick={() => setMobileOpen(false)}
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
@@ -177,7 +180,7 @@ export default function Navbar() {
               {session.user.role === "admin" && (
                 <Link
                   href="/admin"
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-md hover:bg-slate-100 w-full"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 w-full"
                   onClick={() => setMobileOpen(false)}
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
@@ -197,7 +200,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={() => { signOut({ callbackUrl: "/" }); setMobileOpen(false); }}
-                  className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md"
+                  className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
                   title="Sign Out"
                 >
                   <LogOut className="w-4 h-4" />

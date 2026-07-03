@@ -65,7 +65,7 @@ export default function ApiKeysPage() {
       </p>
 
       {/* Create new key */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
         <h2 className="font-semibold text-slate-800 mb-3">Create New Key</h2>
         <div className="flex gap-3">
           <input
@@ -77,7 +77,7 @@ export default function ApiKeysPage() {
           />
           <button
             onClick={createKey}
-            className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800"
+            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
           >
             Generate
           </button>
@@ -95,7 +95,7 @@ export default function ApiKeysPage() {
       </div>
 
       {/* Key list */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6">
         <h2 className="font-semibold text-slate-800 mb-3">Your Keys</h2>
         {loading ? (
           <p className="text-slate-500 text-sm">Loading...</p>

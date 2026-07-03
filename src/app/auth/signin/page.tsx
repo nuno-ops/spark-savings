@@ -38,7 +38,7 @@ function SignInForm() {
   return (
     <div className="max-w-sm mx-auto mt-20">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white rounded-lg mb-4">
+        <div className="inline-flex items-center justify-center w-10 h-10 bg-emerald-500 text-white rounded-xl mb-4">
           <Zap className="w-5 h-5" />
         </div>
         <h1 className="text-xl font-bold text-slate-900">Sign in to Spark Deal</h1>
@@ -46,14 +46,14 @@ function SignInForm() {
       </div>
 
       {resetSuccess && (
-        <div className="flex items-center gap-2.5 bg-emerald-50 text-emerald-700 px-4 py-3 rounded-md mb-4 text-sm border border-emerald-100">
+        <div className="flex items-center gap-2.5 bg-emerald-50 text-emerald-700 px-4 py-3 rounded-lg mb-4 text-sm border border-emerald-100">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           Password reset successfully. Sign in with your new password.
         </div>
       )}
 
       {error && (
-        <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-md mb-4 text-sm border border-red-100">
+        <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm border border-red-100">
           <AlertCircle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -67,7 +67,7 @@ function SignInForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+            className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
             placeholder="you@company.com"
           />
         </div>
@@ -78,7 +78,7 @@ function SignInForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+            className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
         </div>
         <div className="text-right">
@@ -89,7 +89,7 @@ function SignInForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-slate-900 text-white py-2.5 rounded-md hover:bg-slate-800 disabled:opacity-50 text-sm font-medium"
+          className="w-full inline-flex items-center justify-center rounded-full bg-emerald-500 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>

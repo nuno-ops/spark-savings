@@ -1,5 +1,6 @@
 "use client";
 
+import { categoryLabel } from "@/lib/constants";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -177,7 +178,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
     return (
       <div className="max-w-3xl mx-auto px-4 sm:px-6 animate-pulse">
         <div className="h-4 bg-slate-100 rounded w-24 mb-6" />
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <div className="h-5 bg-slate-100 rounded w-1/4 mb-3" />
           <div className="h-7 bg-slate-100 rounded w-3/4 mb-4" />
           <div className="h-4 bg-slate-100 rounded w-full mb-2" />
@@ -218,12 +219,12 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
       </Link>
 
       {/* Request detail card */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm mb-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm mb-6">
         {/* Header */}
         <div className="flex items-center gap-2 mb-3">
           <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded bg-slate-100 text-slate-600 capitalize">
             <Tag className="w-3 h-3" />
-            {request.category}
+            {categoryLabel(request.category)}
           </span>
           <span className={`text-xs font-medium px-2 py-0.5 rounded capitalize ${requestStatusBadge(request.status)}`}>
             {request.status}
@@ -270,14 +271,14 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
           </h2>
 
           {request.proposals.length === 0 ? (
-            <div className="text-center py-12 bg-white border border-slate-200 rounded-xl">
+            <div className="text-center py-12 bg-white border border-slate-200 rounded-2xl">
               <FileText className="w-10 h-10 text-slate-300 mx-auto mb-3" />
               <p className="text-slate-500 text-sm">No proposals yet.</p>
             </div>
           ) : (
             <div className="space-y-3">
               {request.proposals.map((proposal) => (
-                <div key={proposal.id} className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+                <div key={proposal.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <div className="flex items-center gap-2">
@@ -323,7 +324,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                       <button
                         onClick={() => handleProposalAction(proposal.id, "accepted")}
                         disabled={actionLoading === proposal.id}
-                        className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-emerald-500 font-medium disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-emerald-500 font-medium disabled:opacity-50"
                       >
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         Accept
@@ -331,7 +332,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                       <button
                         onClick={() => handleProposalAction(proposal.id, "rejected")}
                         disabled={actionLoading === proposal.id}
-                        className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-md text-xs hover:bg-red-500 font-medium disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 bg-red-600 text-white px-3 py-1.5 rounded-lg text-xs hover:bg-red-500 font-medium disabled:opacity-50"
                       >
                         <XCircle className="w-3.5 h-3.5" />
                         Reject
@@ -398,7 +399,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
 
       {/* ═══ CONTRIBUTOR VIEW — Proposal Form ═══ */}
       {isContributor && request.status === "open" && (!myProposal || myProposal.status === "pending") && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
           <h2 className="text-base font-semibold text-slate-900 mb-1">
             {hasExistingProposal ? "Edit Your Proposal" : "Submit a Proposal"}
           </h2>
@@ -430,7 +431,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
                 placeholder="Briefly describe your proposed solution..."
-                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 required
               />
               <p className="text-xs text-slate-400 mt-1">{summary.length}/2000</p>
@@ -445,7 +446,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                 value={approach}
                 onChange={(e) => setApproach(e.target.value)}
                 placeholder="Explain your methodology, timeline, and how you plan to achieve savings..."
-                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 required
               />
               <p className="text-xs text-slate-400 mt-1">{approach.length}/10000</p>
@@ -462,7 +463,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                   value={estimatedSavings}
                   onChange={(e) => setEstimatedSavings(e.target.value)}
                   placeholder="e.g. 50000"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   required
                 />
               </div>
@@ -476,7 +477,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                   value={proposedPrice}
                   onChange={(e) => setProposedPrice(e.target.value)}
                   placeholder="e.g. 500"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   required
                 />
               </div>
@@ -485,7 +486,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
               {submitting
@@ -500,14 +501,14 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
 
       {/* Not signed in prompt */}
       {!session && request.status === "open" && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm text-center">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm text-center">
           <Target className="w-8 h-8 text-slate-300 mx-auto mb-2" />
           <p className="text-sm text-slate-500 mb-3">
             Sign in as a contributor to submit a proposal for this request.
           </p>
           <Link
             href="/auth/signin"
-            className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
           >
             Sign In
           </Link>

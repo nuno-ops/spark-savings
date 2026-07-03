@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import { CATEGORIES, STAGE1_PRICES } from "@/lib/constants";
+import { CATEGORIES, STAGE1_PRICES, categoryLabel } from "@/lib/constants";
 
 export default function EditOpportunityPage() {
   const { id } = useParams();
@@ -97,7 +97,7 @@ export default function EditOpportunityPage() {
         </div>
       )}
 
-      <div className="space-y-6 bg-white border border-slate-200 rounded-xl p-6">
+      <div className="space-y-6 bg-white border border-slate-200 rounded-2xl p-6">
         <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -149,7 +149,7 @@ export default function EditOpportunityPage() {
               >
                 {CATEGORIES.map((cat) => (
                   <option key={cat} value={cat}>
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    {categoryLabel(cat)}
                   </option>
                 ))}
               </select>
@@ -304,7 +304,7 @@ export default function EditOpportunityPage() {
           <button
             onClick={() => handleSave("published")}
             disabled={saving}
-            className="bg-slate-900 text-white px-6 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-50"
+            className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
           >
             {saving ? "Saving..." : "Publish"}
           </button>

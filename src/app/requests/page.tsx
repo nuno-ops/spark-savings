@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, Target, Package } from "lucide-react";
-import { CATEGORIES } from "@/lib/constants";
+import { CATEGORIES, categoryLabel } from "@/lib/constants";
+import { EmptyState, CardSkeleton } from "@/components/ui";
 
 interface CompanyRequest {
   id: string;
@@ -69,46 +70,36 @@ export default function RequestsPage() {
             placeholder="Search requests..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+            className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
           />
         </div>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="px-3 py-2.5 text-sm border border-slate-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"
+          className="px-3 py-2.5 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
         >
           <option value="all">All Categories</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
-              {c.charAt(0).toUpperCase() + c.slice(1)}
+              {categoryLabel(c)}
             </option>
           ))}
         </select>
       </div>
 
       {loading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm animate-pulse">
-              <div className="h-4 bg-slate-100 rounded w-1/3 mb-3" />
-              <div className="h-5 bg-slate-100 rounded w-3/4 mb-2" />
-              <div className="h-4 bg-slate-100 rounded w-full mb-1" />
-              <div className="h-4 bg-slate-100 rounded w-2/3" />
-            </div>
-          ))}
-        </div>
+        <CardSkeleton />
       ) : requests.length === 0 ? (
-        <div className="text-center py-16">
-          <Package className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-          <p className="text-slate-500 text-sm">
-            {debouncedSearch ? "No requests match your search." : "No open requests yet."}
-          </p>
+        <EmptyState
+          icon={Package}
+          title={debouncedSearch ? "No requests match your search." : "No open requests yet."}
+        >
           {debouncedSearch && (
-            <button onClick={() => setSearch("")} className="mt-2 text-sm text-emerald-600 hover:text-emerald-700">
+            <button onClick={() => setSearch("")} className="text-emerald-600 hover:text-emerald-700">
               Clear search
             </button>
           )}
-        </div>
+        </EmptyState>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {requests.map((req) => {
@@ -117,11 +108,11 @@ export default function RequestsPage() {
               <Link
                 key={req.id}
                 href={`/requests/${req.id}`}
-                className="group bg-white border border-slate-200 rounded-lg p-5 shadow-sm hover:shadow-md hover:border-slate-300 block"
+                className="group bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md hover:border-slate-300 block"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded bg-slate-100 text-slate-600 capitalize">
-                    {req.category}
+                    {categoryLabel(req.category)}
                   </span>
                   {budget && (
                     <span className="text-xs font-semibold text-emerald-600">

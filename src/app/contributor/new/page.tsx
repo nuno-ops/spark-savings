@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { CATEGORIES, STAGE1_PRICES } from "@/lib/constants";
+import { CATEGORIES, STAGE1_PRICES, categoryLabel } from "@/lib/constants";
 
 export default function NewOpportunityPage() {
   const { data: session } = useSession();
@@ -78,7 +78,7 @@ export default function NewOpportunityPage() {
         </div>
       )}
 
-      <div className="space-y-6 bg-white border border-slate-200 rounded-xl p-6">
+      <div className="space-y-6 bg-white border border-slate-200 rounded-2xl p-6">
         {/* PUBLIC TEASER */}
         <div className="border-b pb-4">
           <h2 className="font-semibold text-slate-800 mb-3">
@@ -137,7 +137,7 @@ export default function NewOpportunityPage() {
                 >
                   {CATEGORIES.map((cat) => (
                     <option key={cat} value={cat}>
-                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                      {categoryLabel(cat)}
                     </option>
                   ))}
                 </select>
@@ -325,7 +325,7 @@ export default function NewOpportunityPage() {
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="bg-slate-900 text-white px-6 py-2 rounded-lg hover:bg-slate-800 disabled:opacity-50"
+            className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
           >
             {saving ? "Saving..." : "Publish"}
           </button>

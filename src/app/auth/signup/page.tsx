@@ -42,7 +42,7 @@ export default function SignUpPage() {
   return (
     <div className="max-w-sm mx-auto mt-20">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-10 h-10 bg-slate-900 text-white rounded-lg mb-4">
+        <div className="inline-flex items-center justify-center w-10 h-10 bg-emerald-500 text-white rounded-xl mb-4">
           <Zap className="w-5 h-5" />
         </div>
         <h1 className="text-xl font-bold text-slate-900">Create an account</h1>
@@ -50,7 +50,7 @@ export default function SignUpPage() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-md mb-4 text-sm border border-red-100">
+        <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm border border-red-100">
           <AlertCircle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -64,7 +64,7 @@ export default function SignUpPage() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+            className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
             placeholder="John Smith"
           />
         </div>
@@ -75,7 +75,7 @@ export default function SignUpPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+            className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
             placeholder="you@company.com"
           />
         </div>
@@ -87,7 +87,7 @@ export default function SignUpPage() {
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+            className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             placeholder="Min. 6 characters"
           />
         </div>
@@ -98,26 +98,26 @@ export default function SignUpPage() {
             <button
               type="button"
               onClick={() => setRole("contributor")}
-              className={`flex flex-col items-center gap-1.5 border rounded-md p-4 text-center ${
+              className={`flex flex-col items-center gap-1.5 border rounded-lg p-4 text-center ${
                 role === "contributor"
-                  ? "border-slate-900 bg-slate-50 text-slate-900 ring-1 ring-slate-900"
+                  ? "border-emerald-500 bg-emerald-50 text-slate-900 ring-1 ring-emerald-500"
                   : "border-slate-200 text-slate-500 hover:border-slate-300"
               }`}
             >
-              <Lightbulb className={`w-5 h-5 ${role === "contributor" ? "text-slate-900" : "text-slate-400"}`} />
+              <Lightbulb className={`w-5 h-5 ${role === "contributor" ? "text-emerald-600" : "text-slate-400"}`} />
               <span className="font-medium text-sm">Contributor</span>
               <span className="text-xs text-slate-400">I share savings ideas</span>
             </button>
             <button
               type="button"
               onClick={() => setRole("company")}
-              className={`flex flex-col items-center gap-1.5 border rounded-md p-4 text-center ${
+              className={`flex flex-col items-center gap-1.5 border rounded-lg p-4 text-center ${
                 role === "company"
-                  ? "border-slate-900 bg-slate-50 text-slate-900 ring-1 ring-slate-900"
+                  ? "border-emerald-500 bg-emerald-50 text-slate-900 ring-1 ring-emerald-500"
                   : "border-slate-200 text-slate-500 hover:border-slate-300"
               }`}
             >
-              <Building2 className={`w-5 h-5 ${role === "company" ? "text-slate-900" : "text-slate-400"}`} />
+              <Building2 className={`w-5 h-5 ${role === "company" ? "text-emerald-600" : "text-slate-400"}`} />
               <span className="font-medium text-sm">Company</span>
               <span className="text-xs text-slate-400">I unlock &amp; buy ideas</span>
             </button>
@@ -131,7 +131,7 @@ export default function SignUpPage() {
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full border border-slate-200 rounded-md px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+              className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
               placeholder="e.g. Acme Corporation"
             />
             <p className="text-xs text-slate-400 mt-1">We&apos;ll highlight savings opportunities relevant to your company.</p>
@@ -141,7 +141,7 @@ export default function SignUpPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-slate-900 text-white py-2.5 rounded-md hover:bg-slate-800 disabled:opacity-50 text-sm font-medium"
+          className="w-full inline-flex items-center justify-center rounded-full bg-emerald-500 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
         >
           {loading ? "Creating account..." : "Create Account"}
         </button>

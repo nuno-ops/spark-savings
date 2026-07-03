@@ -74,7 +74,7 @@ function CheckoutSuccessContent() {
       <div className="flex flex-col gap-3">
         <Link
           href={`/opportunity/${result?.opportunityId}`}
-          className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-md hover:bg-slate-800 text-sm font-medium"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
         >
           View Unlocked Content
           <ArrowRight className="w-4 h-4" />

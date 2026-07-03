@@ -229,7 +229,7 @@ export default function CompanyOpportunityPage() {
 
       {/* Stage 1 content */}
       {opp.validationChecklist && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
           {opp.watermark && (
             <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs px-3 py-2 rounded mb-4">
               {opp.watermark}
@@ -263,7 +263,7 @@ export default function CompanyOpportunityPage() {
 
       {/* Stage 2 content */}
       {opp.fullPlaybook && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
           {opp.watermark2 && (
             <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-xs px-3 py-2 rounded mb-4">
               {opp.watermark2}
@@ -288,7 +288,7 @@ export default function CompanyOpportunityPage() {
 
       {/* Review Form (visible if company has any purchase) */}
       {hasPurchase && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
           <h2 className="font-semibold text-slate-800 mb-3">
             {existingReview ? "Your Review" : "Leave a Review"}
           </h2>
@@ -327,7 +327,7 @@ export default function CompanyOpportunityPage() {
           <button
             onClick={submitReview}
             disabled={reviewSaving || reviewRating === 0}
-            className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800 disabled:opacity-50"
+            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
           >
             {reviewSaving
               ? "Submitting..."
@@ -340,7 +340,7 @@ export default function CompanyOpportunityPage() {
 
       {/* Messaging (Stage 2 only) */}
       {hasStage2 && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6 mb-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-6">
           <h2 className="font-semibold text-slate-800 mb-3">Messages</h2>
           <div className="space-y-3 max-h-80 overflow-y-auto mb-4">
             {messages.length === 0 ? (
@@ -377,7 +377,7 @@ export default function CompanyOpportunityPage() {
             />
             <button
               onClick={sendMessage}
-              className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-slate-800"
+              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
             >
               Send
             </button>
@@ -387,7 +387,7 @@ export default function CompanyOpportunityPage() {
 
       {/* Meeting requests (Stage 2 only) */}
       {hasStage2 && (
-        <div className="bg-white border border-slate-200 rounded-xl p-6">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6">
           <h2 className="font-semibold text-slate-800 mb-3">Meetings</h2>
 
           {meetings.map((m) => (

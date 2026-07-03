@@ -37,9 +37,9 @@ function StatCard({ label, value, sub, icon: Icon }: {
   icon: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-8 h-8 rounded-md bg-slate-100 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
           <Icon className="w-4 h-4 text-slate-500" />
         </div>
         <p className="text-xs font-medium text-slate-400 uppercase tracking-wider">{label}</p>
@@ -121,10 +121,10 @@ export default function ContributorDashboard() {
           <p className="text-slate-500 text-sm mt-0.5">Welcome back, {session?.user?.name}</p>
         </div>
         <div className="flex gap-2">
-          <Link href="/contributor/api-keys" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-700 px-3 py-2 rounded-md text-sm hover:bg-slate-50 font-medium">
+          <Link href="/contributor/api-keys" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm hover:bg-slate-50 font-medium">
             <Key className="w-3.5 h-3.5" /> API Keys
           </Link>
-          <Link href="/contributor/new" className="inline-flex items-center gap-1.5 bg-slate-900 text-white px-3 py-2 rounded-md text-sm hover:bg-slate-800 font-medium">
+          <Link href="/contributor/new" className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600">
             <Plus className="w-3.5 h-3.5" /> New Opportunity
           </Link>
         </div>
@@ -158,7 +158,7 @@ export default function ContributorDashboard() {
           </div>
 
           {/* Earnings chart */}
-          <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
             <h3 className="text-sm font-semibold text-slate-900 mb-4">Earnings — Last 12 Months</h3>
             <div className="flex items-end gap-1.5 h-44">
               {analytics.earningsTimeline.map((m) => {
@@ -181,7 +181,7 @@ export default function ContributorDashboard() {
 
           {/* Recent sales */}
           {analytics.payoutHistory.length > 0 && (
-            <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-5">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
               <h3 className="text-sm font-semibold text-slate-900 mb-3">Recent Sales</h3>
               <div className="space-y-2">
                 {analytics.payoutHistory.slice(0, 5).map((p) => (
@@ -213,7 +213,7 @@ export default function ContributorDashboard() {
               </Link>
             </div>
           ) : (
-            <div className="overflow-x-auto bg-white rounded-lg border border-slate-200 shadow-sm">
+            <div className="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-100 text-left">
@@ -261,7 +261,7 @@ export default function ContributorDashboard() {
                           ) : <span className="text-slate-300">&mdash;</span>}
                         </td>
                         <td className="px-4 py-3">
-                          <Link href={`/contributor/${opp.opportunityId}/edit`} className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md inline-flex" title="Edit">
+                          <Link href={`/contributor/${opp.opportunityId}/edit`} className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg inline-flex" title="Edit">
                             <Pencil className="w-3.5 h-3.5" />
                           </Link>
                         </td>
@@ -279,15 +279,15 @@ export default function ContributorDashboard() {
       {tab === "payouts" && analytics && (
         <div>
           <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 text-center">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 text-center">
               <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">Gross Revenue</p>
               <p className="text-xl font-bold text-slate-900 mt-1">&euro;{analytics.payoutSummary.totalGross.toLocaleString()}</p>
             </div>
-            <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 text-center">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 text-center">
               <p className="text-xs text-red-400 uppercase tracking-wider font-medium">Platform Fees (15%)</p>
               <p className="text-xl font-bold text-red-600 mt-1">&minus;&euro;{analytics.payoutSummary.totalFees.toLocaleString()}</p>
             </div>
-            <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 text-center">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 text-center">
               <p className="text-xs text-emerald-500 uppercase tracking-wider font-medium">Net Payout</p>
               <p className="text-xl font-bold text-emerald-600 mt-1">&euro;{analytics.payoutSummary.totalNet.toLocaleString()}</p>
             </div>
@@ -299,7 +299,7 @@ export default function ContributorDashboard() {
               <p className="text-slate-500">No payouts yet. Sales will appear here once companies unlock your opportunities.</p>
             </div>
           ) : (
-            <div className="overflow-x-auto bg-white rounded-lg border border-slate-200 shadow-sm">
+            <div className="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-100 text-left">

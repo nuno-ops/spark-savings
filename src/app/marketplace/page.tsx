@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { CATEGORIES } from "@/lib/constants";
-import { Search, Star, Package, SlidersHorizontal, UserRound, Building2, Sparkles } from "lucide-react";
+import { CATEGORIES, categoryLabel } from "@/lib/constants";
+import { Search, Package, SlidersHorizontal, UserRound, Building2, Sparkles } from "lucide-react";
+import { StarRating, EmptyState, CardSkeleton } from "@/components/ui";
 
 interface Opportunity {
   id: string;
@@ -19,28 +20,6 @@ interface Opportunity {
   createdAt: string;
   contributor: { name: string };
   matchesCompany: boolean;
-}
-
-function StarRating({ rating, count }: { rating: number; count: number }) {
-  return (
-    <span className="inline-flex items-center gap-1 text-sm">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${
-            i <= Math.round(rating)
-              ? "text-amber-400 fill-amber-400"
-              : "text-slate-200"
-          }`}
-        />
-      ))}
-      {count > 0 && (
-        <span className="text-xs text-slate-500 ml-1">
-          {rating.toFixed(1)} ({count})
-        </span>
-      )}
-    </span>
-  );
 }
 
 export default function HomePage() {
@@ -91,26 +70,26 @@ export default function HomePage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by title, description, or company..."
-            className="w-full border border-slate-200 rounded-md pl-9 pr-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent placeholder:text-slate-400"
+            className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
           />
         </div>
         <div className="flex gap-2">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="border border-slate-200 rounded-md px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900"
+            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <option value="all">All Categories</option>
             {CATEGORIES.map((cat) => (
               <option key={cat} value={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {categoryLabel(cat)}
               </option>
             ))}
           </select>
           <select
             value={priceTier}
             onChange={(e) => setPriceTier(e.target.value)}
-            className="border border-slate-200 rounded-md px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900"
+            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <option value="">Any Price</option>
             <option value="250">Stage 1: &euro;250</option>
@@ -121,45 +100,33 @@ export default function HomePage() {
 
       {/* Cards */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-lg border border-slate-200 p-5 animate-pulse">
-              <div className="h-4 bg-slate-100 rounded w-20 mb-4" />
-              <div className="h-5 bg-slate-100 rounded w-full mb-2" />
-              <div className="h-4 bg-slate-100 rounded w-3/4 mb-3" />
-              <div className="h-3 bg-slate-100 rounded w-1/2" />
-            </div>
-          ))}
-        </div>
+        <CardSkeleton />
       ) : opportunities.length === 0 ? (
-        <div className="text-center py-20">
-          <Package className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-          <p className="text-slate-500 font-medium">
-            {debouncedSearch ? "No opportunities match your search." : "No opportunities yet."}
-          </p>
-          <p className="text-sm mt-1.5 text-slate-400">
-            {debouncedSearch ? (
-              <button onClick={() => setSearch("")} className="text-slate-700 underline underline-offset-2">
-                Clear search
-              </button>
-            ) : (
-              <>
-                Check back soon, or{" "}
-                <Link href="/auth/signup" className="text-slate-700 underline underline-offset-2">
-                  sign up as a contributor
-                </Link>{" "}
-                to post one.
-              </>
-            )}
-          </p>
-        </div>
+        <EmptyState
+          icon={Package}
+          title={debouncedSearch ? "No opportunities match your search." : "No opportunities yet."}
+        >
+          {debouncedSearch ? (
+            <button onClick={() => setSearch("")} className="text-slate-700 underline underline-offset-2">
+              Clear search
+            </button>
+          ) : (
+            <>
+              Check back soon, or{" "}
+              <Link href="/auth/signup" className="text-slate-700 underline underline-offset-2">
+                sign up as a contributor
+              </Link>{" "}
+              to post one.
+            </>
+          )}
+        </EmptyState>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {opportunities.map((opp) => (
             <Link
               key={opp.id}
               href={`/opportunity/${opp.id}`}
-              className={`group bg-white rounded-lg border p-5 shadow-sm hover:shadow-md ${
+              className={`group bg-white rounded-2xl border p-5 shadow-sm hover:shadow-md ${
                 opp.matchesCompany
                   ? "border-emerald-200 border-l-4 border-l-emerald-400 hover:border-emerald-300"
                   : "border-slate-200 hover:border-slate-300"
@@ -168,7 +135,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded capitalize">
-                    {opp.category}
+                    {categoryLabel(opp.category)}
                   </span>
                   {opp.matchesCompany && (
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
