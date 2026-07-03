@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   DollarSign, ExternalLink, RotateCcw, ShoppingBag,
-  Target, Plus, Calendar, Tag, Building2, Check, Info,
+  Target, Plus, Calendar, Tag, Building2, Check, Info, AlertCircle,
 } from "lucide-react";
 
 type CompanyTab = "purchases" | "requests";
@@ -45,6 +45,7 @@ export default function CompanyDashboard() {
   const [savedCompanyName, setSavedCompanyName] = useState("");
   const [savingProfile, setSavingProfile] = useState(false);
   const [profileSaved, setProfileSaved] = useState(false);
+  const [refundError, setRefundError] = useState("");
 
   // Load purchases on auth
   useEffect(() => {
@@ -79,12 +80,13 @@ export default function CompanyDashboard() {
   }, [tab, requestsLoaded]);
 
   async function requestRefund(purchaseId: string) {
+    setRefundError("");
     const res = await fetch(`/api/purchases/${purchaseId}/refund`, { method: "POST" });
     if (res.ok) {
       setPurchases(purchases.map((p) => p.id === purchaseId ? { ...p, status: "refund_requested" } : p));
     } else {
       const data = await res.json();
-      alert(data.error || "Refund request failed");
+      setRefundError(data.error || "Refund request failed. Please try again.");
     }
   }
 
@@ -234,6 +236,12 @@ export default function CompanyDashboard() {
       {/* ═══ PURCHASES TAB ═══ */}
       {tab === "purchases" && (
         <>
+          {refundError && (
+            <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm border border-red-100">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {refundError}
+            </div>
+          )}
           {purchases.length === 0 ? (
             <div className="text-center py-16">
               <ShoppingBag className="w-10 h-10 text-slate-300 mx-auto mb-3" />
