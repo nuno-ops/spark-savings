@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Lock, Unlock, TrendingUp, MessageCircle, AlertTriangle, ChevronRight } from "lucide-react";
+import { ArrowLeft, Lock, Unlock, TrendingUp, MessageCircle, AlertTriangle, AlertCircle, ChevronRight } from "lucide-react";
 import { Stars } from "@/components/ui";
 
 interface ReviewItem {
@@ -50,6 +50,7 @@ export default function OpportunityDetailPage() {
   const [opp, setOpp] = useState<OpportunityDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [purchasing, setPurchasing] = useState(false);
+  const [purchaseError, setPurchaseError] = useState("");
 
   useEffect(() => {
     fetch(`/api/opportunities/${id}`)
@@ -66,19 +67,27 @@ export default function OpportunityDetailPage() {
       return;
     }
     setPurchasing(true);
-    const res = await fetch("/api/purchases", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ opportunityId: id, stage }),
-    });
-    const data = await res.json();
+    setPurchaseError("");
+    try {
+      const res = await fetch("/api/purchases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ opportunityId: id, stage }),
+      });
+      const data = await res.json();
 
-    if (data.checkoutUrl) {
-      window.location.href = data.checkoutUrl;
-    } else if (res.ok) {
-      window.location.reload();
-    } else {
-      alert(data.error || "Purchase failed");
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else if (res.ok) {
+        const updated = await fetch(`/api/opportunities/${id}`).then((r) => r.json());
+        setOpp(updated);
+        setPurchasing(false);
+      } else {
+        setPurchaseError(data.error || "Purchase failed. Please try again.");
+        setPurchasing(false);
+      }
+    } catch {
+      setPurchaseError("Something went wrong. Check your connection and try again.");
       setPurchasing(false);
     }
   }
@@ -106,13 +115,20 @@ export default function OpportunityDetailPage() {
         Back to marketplace
       </Link>
 
+      {purchaseError && (
+        <div className="flex items-center gap-2.5 bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-4 text-sm border border-red-100">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          {purchaseError}
+        </div>
+      )}
+
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded capitalize">
             {categoryLabel(opp.category)}
           </span>
           <span className="text-xs text-slate-400 font-medium">
-            Score: {Math.round(opp.confidenceScore)}/100
+            Confidence {Math.round(opp.confidenceScore)}/100
           </span>
         </div>
 
