@@ -28,7 +28,7 @@ export default function Navbar() {
             aria-current={active ? "page" : undefined}
             className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg ${
               active
-                ? "text-emerald-700 bg-emerald-50 font-medium"
+                ? "text-slate-900 bg-slate-100 font-medium"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
             }`}
             onClick={() => setMobileOpen(false)}
@@ -48,7 +48,7 @@ export default function Navbar() {
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-emerald-500 text-white">
             <Zap className="w-4 h-4" />
           </span>
-          Spark<span className="text-emerald-500">Deal</span>
+          Spark Deal
         </Link>
 
         {/* Desktop nav */}
@@ -65,7 +65,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/auth/signup"
-                className="ml-1 rounded-full bg-emerald-500 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                className="ml-1 rounded-lg bg-slate-900 px-4 py-1.5 text-sm font-semibold text-white transition hover:bg-slate-700"
               >
                 Sign Up
               </Link>
@@ -149,7 +149,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/auth/signup"
-                className="block text-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                className="block text-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign Up

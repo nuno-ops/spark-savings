@@ -221,7 +221,7 @@ export default function OpportunityDetailPage() {
                 <button
                   onClick={() => handlePurchase(1)}
                   disabled={purchasing}
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
                 >
                   {purchasing ? "Processing..." : `Unlock Stage 1 — \u20AC${opp.stage1Price}`}
                   <ChevronRight className="w-4 h-4" />
@@ -293,7 +293,7 @@ export default function OpportunityDetailPage() {
                   <button
                     onClick={() => handlePurchase(2)}
                     disabled={purchasing}
-                    className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+                    className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
                   >
                     {purchasing ? "Processing..." : `Unlock Stage 2 — \u20AC${opp.stage2Price}`}
                     <ChevronRight className="w-4 h-4" />

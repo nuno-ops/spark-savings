@@ -102,7 +102,7 @@ export default function NewRequestPage() {
               value={form.title}
               onChange={(e) => updateField("title", e.target.value)}
               placeholder="e.g. Reduce cloud infrastructure costs"
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
               required
               maxLength={200}
             />
@@ -119,7 +119,7 @@ export default function NewRequestPage() {
               value={form.description}
               onChange={(e) => updateField("description", e.target.value)}
               placeholder="Describe the problem area, your current setup, what you've tried, and what kind of savings you're hoping for..."
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
               required
               maxLength={5000}
             />
@@ -134,7 +134,7 @@ export default function NewRequestPage() {
             <select
               value={form.category}
               onChange={(e) => updateField("category", e.target.value)}
-              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
+              className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-slate-400 bg-white"
             >
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
@@ -157,7 +157,7 @@ export default function NewRequestPage() {
                   value={form.budgetLow}
                   onChange={(e) => updateField("budgetLow", e.target.value)}
                   placeholder="Min (e.g. 250)"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                 />
               </div>
               <div>
@@ -167,7 +167,7 @@ export default function NewRequestPage() {
                   value={form.budgetHigh}
                   onChange={(e) => updateField("budgetHigh", e.target.value)}
                   placeholder="Max (e.g. 1000)"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                 />
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function NewRequestPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
           >
             <CheckCircle2 className="w-4 h-4" />
             {saving ? "Posting..." : "Post Request"}

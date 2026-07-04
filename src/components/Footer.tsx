@@ -12,7 +12,7 @@ export default function Footer() {
               <span className="grid h-6 w-6 place-items-center rounded-lg bg-emerald-500 text-white">
                 <Zap className="w-3.5 h-3.5" />
               </span>
-              Spark<span className="text-emerald-500">Deal</span>
+              Spark Deal
             </Link>
             <p className="text-sm text-slate-500 mt-2 leading-relaxed">
               The marketplace for cost-saving strategies. Submit ideas, unlock savings.

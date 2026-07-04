@@ -6,10 +6,10 @@ import { Star } from "lucide-react";
    secondary, rounded-lg inputs, rounded-2xl cards. */
 
 const BTN_BASE =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition disabled:opacity-50 disabled:pointer-events-none";
 
 const BTN_VARIANTS = {
-  primary: "bg-emerald-500 text-white hover:bg-emerald-600",
+  primary: "bg-slate-900 text-white hover:bg-slate-700",
   secondary:
     "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50",
   dark: "bg-slate-900 text-white hover:bg-slate-800",
@@ -31,7 +31,7 @@ export function btn(
 export const CARD = "bg-white rounded-2xl border border-slate-200 shadow-sm";
 
 export const INPUT =
-  "w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400";
+  "w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent placeholder:text-slate-400";
 
 /* ── Stars ────────────────────────────────────────────── */
 

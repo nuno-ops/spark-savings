@@ -77,7 +77,7 @@ export default function ApiKeysPage() {
           />
           <button
             onClick={createKey}
-            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
             Generate
           </button>

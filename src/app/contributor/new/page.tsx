@@ -325,7 +325,7 @@ export default function NewOpportunityPage() {
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="rounded-full bg-emerald-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+            className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
           >
             {saving ? "Saving..." : "Publish"}
           </button>

@@ -1,143 +1,88 @@
 import Link from "next/link";
 import { CATEGORIES, categoryLabel } from "@/lib/constants";
 import {
-  Lightbulb,
   Search,
-  Rocket,
   ArrowRight,
-  ArrowUpRight,
   CheckCircle2,
   Building2,
-  Zap,
+  Lightbulb,
   Shield,
   Bot,
   Star,
   FileText,
   Users,
   TrendingDown,
-  Bell,
   SlidersHorizontal,
-  Cloud,
-  Truck,
-  Wallet,
-  Megaphone,
-  Settings,
-  Scale,
-  UserCog,
-  Lightbulb as Idea,
-  LucideIcon,
 } from "lucide-react";
-
-const CATEGORY_ICONS: Record<string, LucideIcon> = {
-  general: Idea,
-  energy: Zap,
-  procurement: FileText,
-  logistics: Truck,
-  technology: Cloud,
-  operations: Settings,
-  finance: Wallet,
-  hr: UserCog,
-  marketing: Megaphone,
-  compliance: Scale,
-};
 
 export default function LandingPage() {
   return (
     <div className="-mx-4 sm:-mx-6 -mt-10">
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-white px-4 sm:px-6 pt-14 pb-10 md:pt-20">
-        <div className="relative max-w-6xl mx-auto grid items-center gap-10 lg:gap-14 lg:grid-cols-[1.05fr_1fr]">
+      <section className="bg-white px-4 sm:px-6 pt-16 pb-16 md:pt-24 border-b border-slate-100">
+        <div className="max-w-6xl mx-auto grid items-center gap-12 lg:gap-16 lg:grid-cols-[1.1fr_1fr]">
           {/* Left column */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-700">
-              <Zap className="w-3.5 h-3.5" />
-              Earn from smart ideas
-            </span>
-
-            <h1 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-slate-900">
-              Turn savings ideas
+            <h1 className="text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-slate-900">
+              Proven ways to cut
               <br />
-              into <span className="text-emerald-500">income</span>
+              your company&apos;s costs
             </h1>
 
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-slate-500">
-              Spark Deal connects sharp problem-solvers with companies that pay
-              to spend less. Share a cost-cutting playbook, get unlocked, and
-              earn 85% of every sale.
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-slate-600">
+              Spark Deal is a marketplace of cost-saving playbooks written by
+              people who&apos;ve done it. Companies unlock them to spend less.
+              Contributors earn 85% of every sale.
             </p>
 
             {/* Search → marketplace (works without JS) */}
             <form
               action="/marketplace"
               method="get"
-              className="mt-7 flex max-w-lg items-center gap-2 rounded-full border border-slate-200 bg-white p-2 pl-5 shadow-sm focus-within:ring-2 focus-within:ring-emerald-500"
+              className="mt-8 flex max-w-lg items-center gap-2 rounded-lg border border-slate-300 bg-white p-1.5 pl-4 focus-within:border-slate-400"
             >
-              <Search className="w-4.5 h-4.5 shrink-0 text-slate-400" />
+              <Search className="w-4 h-4 shrink-0 text-slate-400" />
               <input
                 name="search"
-                placeholder="Search ideas, e.g. “AWS cost audit”"
+                placeholder="Search playbooks, e.g. “AWS cost audit”"
                 aria-label="Search savings opportunities"
                 className="min-w-0 flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
               />
               <button
                 type="submit"
-                className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-emerald-600"
+                className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
               >
                 Search
               </button>
             </form>
 
-            {/* Stat callout */}
-            <div className="mt-9 flex items-center gap-5">
-              <div className="flex shrink-0 flex-col rounded-2xl bg-emerald-50 px-5 py-4 leading-none">
-                <span className="text-3xl font-bold tracking-tight text-emerald-700">
-                  85%
-                </span>
-                <span className="mt-2 text-xs font-semibold text-emerald-600">
-                  You keep
-                </span>
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-900">
-                  Real money, real fast
-                </p>
-                <p className="mt-0.5 text-sm leading-relaxed text-slate-500">
-                  Set your own price — we take a flat 15%. Get paid when a
-                  company unlocks your playbook.
-                </p>
-                <Link
-                  href="/how-it-works"
-                  className="mt-1.5 inline-flex items-center gap-1 border-b-2 border-emerald-200 pb-0.5 text-sm font-semibold text-emerald-600 hover:border-emerald-500"
-                >
-                  See how it works <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
+            {/* Plain facts, no stat theatrics */}
+            <p className="mt-6 text-sm text-slate-500">
+              85% contributor payout&ensp;&middot;&ensp;48-hour refund on every
+              unlock&ensp;&middot;&ensp;Each playbook reviewed before it earns
+            </p>
           </div>
 
-          {/* Right column — visual with floating cards */}
-          <div className="relative hidden min-h-[420px] lg:block">
-            {/* organic blob */}
-            <div
-              className="absolute inset-y-[6%] left-[8%] right-[-4%] bg-emerald-500/95"
-              style={{ borderRadius: "46% 54% 58% 42% / 54% 44% 56% 46%" }}
-            />
-            {/* sample opportunity card — mirrors the real marketplace card */}
-            <div className="absolute inset-y-[14%] left-[20%] right-[8%] z-10 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+          {/* Right column — example opportunity, presented plainly */}
+          <div className="hidden lg:block">
+            <p className="mb-2 text-xs font-medium uppercase tracking-widest text-slate-400">
+              Example opportunity
+            </p>
+            <div className="flex flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between">
-                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500">
+                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
                   Technology
                 </span>
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700">
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-500">
                   <SlidersHorizontal className="h-3 w-3" />
-                  91/100
+                  Confidence 91/100
                 </span>
               </div>
 
               <h3 className="mt-4 text-lg font-semibold leading-snug text-slate-900">
                 Ditch Zendesk and save 50–70%
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 Switch to Freshdesk without losing features — full migration
                 playbook for support teams of 10–80 agents.
               </p>
@@ -146,70 +91,42 @@ export default function LandingPage() {
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                 ))}
-                <span className="ml-1 text-xs text-slate-400">4.9 (27)</span>
+                <span className="ml-1 text-xs text-slate-500">4.9 (27)</span>
               </div>
 
-              <div className="mt-auto flex items-end justify-between border-t border-slate-100 pt-4">
+              <div className="mt-5 flex items-end justify-between border-t border-slate-100 pt-4">
                 <div>
                   <p className="text-[11px] font-medium uppercase tracking-wide text-slate-400">
                     Est. savings
                   </p>
-                  <p className="text-sm font-semibold text-slate-900">
+                  <p className="text-sm font-semibold text-emerald-700">
                     €15k–€60k / yr
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white">
-                  Unlock €250
-                  <ArrowRight className="h-3.5 w-3.5" />
+                <span className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white">
+                  Unlock — €250
                 </span>
-              </div>
-            </div>
-
-            {/* floating: alert pill — clips the card's upper-left edge */}
-            <div className="absolute left-[-9%] top-[22%] z-20 flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-50 text-emerald-700">
-                <Bell className="w-3.5 h-3.5" />
-              </span>
-              <span className="text-sm font-bold text-slate-900">
-                Idea alerts on
-              </span>
-            </div>
-
-            {/* floating: trust badge — sits at the lower-left corner */}
-            <div className="absolute bottom-[-6%] left-[-7%] z-20 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-xl">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-emerald-50 text-emerald-700">
-                <Shield className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-sm font-bold text-slate-900">Verified savings</p>
-                <p className="text-[13px] text-slate-500">Reviewed before it earns</p>
               </div>
             </div>
           </div>
         </div>
-
       </section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────── */}
-      <section className="bg-slate-50/60 px-4 sm:px-6 py-20 md:py-24">
+      <section className="bg-white px-4 sm:px-6 py-20">
         <div className="mx-auto max-w-5xl">
-          <div className="mx-auto mb-14 max-w-xl text-center">
-            <span className="inline-flex items-center rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-700">
+          <div className="mb-12 max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
               How it works
-            </span>
-            <h2 className="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            </p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
               Get paid for spending less
             </h2>
-            <p className="mt-3 text-slate-500">
-              Three steps from idea to payout. No retainers, no gatekeepers —
-              just outcomes.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
             {[
               {
-                icon: Lightbulb,
                 n: "01",
                 title: "Submit an idea",
                 desc: "Contributors share a cost-saving playbook with a validation checklist, requirements, and a clear approach. AI agents can submit via API too.",
@@ -217,45 +134,33 @@ export default function LandingPage() {
                 cta: "Start contributing",
               },
               {
-                icon: Search,
                 n: "02",
                 title: "Browse & unlock",
                 desc: "Companies browse opportunities by category and confidence score. Unlock in stages — pay only for the level of detail you need.",
                 href: "/marketplace",
-                cta: "Browse marketplace",
+                cta: "Browse the marketplace",
               },
               {
-                icon: Rocket,
                 n: "03",
                 title: "Implement & save",
-                desc: "Get the full playbook, templates, and a direct meeting with the contributor. Start saving immediately, fully protected.",
+                desc: "Get the full playbook, templates, and a direct meeting with the contributor. 48-hour refund if it doesn't apply to you.",
                 href: "/how-it-works",
                 cta: "See the details",
               },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="group rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-              >
-                <div className="mb-6 flex items-center justify-between">
-                  <span className="grid h-13 w-13 place-items-center rounded-2xl bg-emerald-50 p-3 text-emerald-700">
-                    <s.icon className="h-6 w-6" />
-                  </span>
-                  <span className="text-3xl font-bold tracking-tight text-slate-200">
-                    {s.n}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900">
+            ].map((s) => (
+              <div key={s.n} className="border-t-2 border-slate-900 pt-5">
+                <p className="text-sm font-semibold text-slate-400">{s.n}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-900">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   {s.desc}
                 </p>
                 <Link
                   href={s.href}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-emerald-600 hover:text-emerald-700"
+                  className="mt-3 inline-block text-sm font-medium text-slate-900 underline underline-offset-4 decoration-slate-300 hover:decoration-slate-900"
                 >
-                  {s.cta} <ArrowUpRight className="h-3.5 w-3.5" />
+                  {s.cta}
                 </Link>
               </div>
             ))}
@@ -264,21 +169,23 @@ export default function LandingPage() {
       </section>
 
       {/* ── VALUE PROPOSITIONS ───────────────────────────── */}
-      <section className="bg-white px-4 sm:px-6 py-20 md:py-24">
+      <section className="bg-slate-50 px-4 sm:px-6 py-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-14 text-center text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-            Built for Both Sides
+          <h2 className="mb-12 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            Built for both sides
           </h2>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* For Contributors */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-              <div className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-slate-900 text-white">
-                <Lightbulb className="h-5 w-5" />
+            <div className="rounded-xl border border-slate-200 bg-white p-8">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-slate-100 text-slate-700">
+                  <Lightbulb className="h-4.5 w-4.5" />
+                </span>
+                <h3 className="text-lg font-semibold text-slate-900">
+                  For Contributors
+                </h3>
               </div>
-              <h3 className="mb-4 text-lg font-semibold text-slate-900">
-                For Contributors
-              </h3>
               <ul className="space-y-3 text-sm">
                 {[
                   {
@@ -307,18 +214,18 @@ export default function LandingPage() {
                   },
                   {
                     icon: Shield,
-                    text: "AI-powered quality triage ensures only good content gets published",
+                    text: "Quality triage ensures only good content gets published",
                   },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-slate-600">
-                    <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                    <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
                     <span>{item.text}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href="/auth/signup"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                className="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
               >
                 Start Contributing
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -326,13 +233,15 @@ export default function LandingPage() {
             </div>
 
             {/* For Companies */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-              <div className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-emerald-500 text-white">
-                <Building2 className="h-5 w-5" />
+            <div className="rounded-xl border border-slate-200 bg-white p-8">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-slate-100 text-slate-700">
+                  <Building2 className="h-4.5 w-4.5" />
+                </span>
+                <h3 className="text-lg font-semibold text-slate-900">
+                  For Companies
+                </h3>
               </div>
-              <h3 className="mb-4 text-lg font-semibold text-slate-900">
-                For Companies
-              </h3>
               <ul className="space-y-3 text-sm">
                 {[
                   {
@@ -374,14 +283,14 @@ export default function LandingPage() {
                   },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-slate-600">
-                    <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                    <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
                     <span>{item.text}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href="/marketplace"
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                className="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
               >
                 Browse Opportunities
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -392,64 +301,49 @@ export default function LandingPage() {
       </section>
 
       {/* ── CATEGORIES ───────────────────────────────────── */}
-      <section className="bg-slate-50/60 px-4 sm:px-6 py-20 md:py-24">
+      <section className="bg-white px-4 sm:px-6 py-20">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="inline-flex items-center rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-700">
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
                 Categories
-              </span>
+              </p>
               <h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
                 Where the savings hide
               </h2>
             </div>
-            <Link
-              href="/marketplace"
-              className="inline-flex items-center gap-1 border-b-2 border-emerald-200 pb-0.5 text-sm font-semibold text-emerald-600 hover:border-emerald-500"
-            >
-              Browse all categories <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {CATEGORIES.map((cat) => {
-              const Icon = CATEGORY_ICONS[cat] ?? Idea;
-              return (
-                <Link
-                  key={cat}
-                  href={`/marketplace?category=${cat}`}
-                  className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
-                >
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-500 group-hover:text-white">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="flex-1 font-semibold text-slate-900">
-                    {categoryLabel(cat)}
-                  </span>
-                  <ArrowUpRight className="h-4.5 w-4.5 text-slate-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-emerald-500" />
-                </Link>
-              );
-            })}
+          <div className="flex flex-wrap gap-2.5">
+            {CATEGORIES.map((cat) => (
+              <Link
+                key={cat}
+                href={`/marketplace?category=${cat}`}
+                className="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:border-slate-900 hover:text-slate-900"
+              >
+                {categoryLabel(cat)}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── PRICING ──────────────────────────────────────── */}
-      <section className="bg-white px-4 sm:px-6 py-20 md:py-24">
+      <section className="bg-slate-50 px-4 sm:px-6 py-20">
         <div className="mx-auto max-w-4xl">
-          <p className="mb-2 text-center text-sm font-semibold uppercase tracking-wide text-emerald-600">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-400">
             Pricing
           </p>
-          <h2 className="mb-3 text-center text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
-            Simple, Transparent Pricing
+          <h2 className="mb-3 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">
+            Simple, transparent pricing
           </h2>
-          <p className="mx-auto mb-12 max-w-xl text-center text-slate-500">
+          <p className="mb-10 max-w-xl text-slate-600">
             Pay per opportunity. Unlock only what you need.
           </p>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Stage 1 */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+            <div className="rounded-xl border border-slate-200 bg-white p-8">
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 Stage 1
               </p>
@@ -471,7 +365,7 @@ export default function LandingPage() {
                   "48-hour refund window",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-slate-400" />
                     {item}
                   </li>
                 ))}
@@ -479,9 +373,9 @@ export default function LandingPage() {
             </div>
 
             {/* Stage 2 */}
-            <div className="relative rounded-2xl border-2 border-slate-900 bg-white p-8 shadow-sm">
-              <div className="absolute -top-3 left-6 rounded-full bg-slate-900 px-3 py-1 text-xs font-medium text-white">
-                Most Value
+            <div className="relative rounded-xl border-2 border-slate-900 bg-white p-8">
+              <div className="absolute -top-3 left-6 rounded bg-slate-900 px-2.5 py-1 text-xs font-medium text-white">
+                Most value
               </div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 Stage 2
@@ -500,7 +394,7 @@ export default function LandingPage() {
                   "Direct messaging & meeting with contributor",
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-slate-400" />
                     {item}
                   </li>
                 ))}
@@ -508,43 +402,37 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <p className="mt-6 text-center text-xs text-slate-400">
+          <p className="mt-6 text-xs text-slate-500">
             15% platform fee. Contributors keep 85% of every sale. All prices in
             EUR.
           </p>
         </div>
       </section>
 
-      {/* ── FINAL CTA (accent band) ──────────────────────── */}
-      <section className="px-4 sm:px-6 pb-20 md:pb-24">
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-emerald-500 px-8 py-16 md:px-14">
-          <div className="absolute -right-16 -top-16 h-80 w-80 rounded-full bg-emerald-400/40" />
-          <div className="absolute -bottom-24 right-32 h-64 w-64 rounded-full bg-white/10" />
-          <div className="relative max-w-xl">
-            <h2 className="text-2xl font-bold leading-tight tracking-tight text-white md:text-4xl">
-              Got an idea that
-              <br />
-              saves money? Cash it in.
-            </h2>
-            <p className="mt-4 text-lg text-emerald-50">
-              Join 5,200+ contributors turning sharp thinking into steady income
-              on Spark Deal.
-            </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/auth/signup"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-base font-semibold text-emerald-700 hover:bg-emerald-50"
-              >
-                Create free account
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-7 py-3 text-base font-semibold text-white hover:bg-white/10"
-              >
-                How it works
-              </Link>
-            </div>
+      {/* ── FINAL CTA ────────────────────────────────────── */}
+      <section className="bg-slate-900 px-4 sm:px-6 py-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+            Got an idea that saves money?
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-slate-300">
+            Turn sharp thinking into income, or find your company&apos;s next
+            cost cut.
+          </p>
+          <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/auth/signup"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-6 py-2.5 text-sm font-medium text-slate-900 hover:bg-slate-100"
+            >
+              Create free account
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center justify-center rounded-md border border-slate-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-white/10"
+            >
+              How it works
+            </Link>
           </div>
         </div>
       </section>

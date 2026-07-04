@@ -124,7 +124,7 @@ export default function ContributorDashboard() {
           <Link href="/contributor/api-keys" className="inline-flex items-center gap-1.5 border border-slate-200 text-slate-700 px-3 py-2 rounded-lg text-sm hover:bg-slate-50 font-medium">
             <Key className="w-3.5 h-3.5" /> API Keys
           </Link>
-          <Link href="/contributor/new" className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600">
+          <Link href="/contributor/new" className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">
             <Plus className="w-3.5 h-3.5" /> New Opportunity
           </Link>
         </div>

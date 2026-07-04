@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
     <div className="max-w-4xl mx-auto">
       {/* ── Header ─────────────────────────────────────── */}
       <div className="text-center mb-14">
-        <span className="inline-flex items-center rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-700">
+        <span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
           How it works
         </span>
         <h1 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
@@ -86,10 +86,10 @@ export default function HowItWorksPage() {
         ].map((s, i) => (
           <div
             key={i}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
           >
             <div className="mb-5 flex items-center justify-between">
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
+              <span className="grid h-12 w-12 place-items-center rounded-lg bg-slate-100 text-slate-700">
                 <s.icon className="h-5 w-5" />
               </span>
               <span className="text-2xl font-bold tracking-tight text-slate-200">
@@ -133,7 +133,7 @@ export default function HowItWorksPage() {
         {/* Companies */}
         <div className="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
-            <span className="grid h-10 w-10 place-items-center rounded-lg bg-emerald-500 text-white">
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-slate-900 text-white">
               <Building2 className="w-5 h-5" />
             </span>
             <h2 className="text-lg font-semibold text-slate-900">
@@ -144,7 +144,7 @@ export default function HowItWorksPage() {
           <ol className="space-y-5 text-sm text-slate-700">
             {COMPANY_STEPS.map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="flex-shrink-0 w-6 h-6 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <span className="flex-shrink-0 w-6 h-6 bg-slate-900 text-white rounded-full flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
                 <div>
@@ -199,21 +199,18 @@ export default function HowItWorksPage() {
       </div>
 
       {/* ── CTA band ───────────────────────────────────── */}
-      <div className="relative overflow-hidden rounded-3xl bg-emerald-500 px-8 py-12 md:px-12 mb-6">
-        <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-emerald-400/40" />
-        <div className="absolute -bottom-20 right-24 h-44 w-44 rounded-full bg-white/10" />
-        <div className="relative">
+      <div className="relative overflow-hidden rounded-2xl bg-slate-900 px-8 py-12 md:px-12 mb-6">        <div className="relative">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
             Ready to get started?
           </h2>
-          <p className="mt-2 text-emerald-50">
+          <p className="mt-2 text-slate-300">
             Join as a contributor to monetize your expertise, or as a company
             to discover cost-saving opportunities.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/auth/signup"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-slate-900 hover:bg-slate-100"
             >
               Create Your Account
               <ArrowRight className="h-4 w-4" />
