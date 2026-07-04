@@ -70,14 +70,14 @@ export default function HomePage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by title, description, or company..."
-            className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder:text-slate-400"
+            className="w-full border border-slate-200 rounded-lg pl-9 pr-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent placeholder:text-slate-400"
           />
         </div>
         <div className="flex gap-2">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400"
           >
             <option value="all">All Categories</option>
             {CATEGORIES.map((cat) => (
@@ -89,7 +89,7 @@ export default function HomePage() {
           <select
             value={priceTier}
             onChange={(e) => setPriceTier(e.target.value)}
-            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400"
           >
             <option value="">Any Price</option>
             <option value="250">Stage 1: &euro;250</option>

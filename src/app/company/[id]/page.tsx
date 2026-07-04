@@ -327,7 +327,7 @@ export default function CompanyOpportunityPage() {
           <button
             onClick={submitReview}
             disabled={reviewSaving || reviewRating === 0}
-            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
           >
             {reviewSaving
               ? "Submitting..."
@@ -377,7 +377,7 @@ export default function CompanyOpportunityPage() {
             />
             <button
               onClick={sendMessage}
-              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
+              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
             >
               Send
             </button>

@@ -431,7 +431,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
                 placeholder="Briefly describe your proposed solution..."
-                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                 required
               />
               <p className="text-xs text-slate-400 mt-1">{summary.length}/2000</p>
@@ -446,7 +446,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                 value={approach}
                 onChange={(e) => setApproach(e.target.value)}
                 placeholder="Explain your methodology, timeline, and how you plan to achieve savings..."
-                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                 required
               />
               <p className="text-xs text-slate-400 mt-1">{approach.length}/10000</p>
@@ -463,7 +463,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                   value={estimatedSavings}
                   onChange={(e) => setEstimatedSavings(e.target.value)}
                   placeholder="e.g. 50000"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                   required
                 />
               </div>
@@ -477,7 +477,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
                   value={proposedPrice}
                   onChange={(e) => setProposedPrice(e.target.value)}
                   placeholder="e.g. 500"
-                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent"
                   required
                 />
               </div>
@@ -486,7 +486,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
               {submitting
@@ -508,7 +508,7 @@ export default function RequestDetailPage({ params }: { params: Promise<{ id: st
           </p>
           <Link
             href="/auth/signin"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-600"
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
             Sign In
           </Link>
